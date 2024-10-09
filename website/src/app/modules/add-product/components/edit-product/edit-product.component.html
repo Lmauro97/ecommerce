@@ -1,0 +1,375 @@
+<div
+  class="container-add_producto border mt-4 rounded p-2 pt-5"
+  [formGroup]="formCreateProduct"
+>
+  <div class="container-title">
+    <h2 class="text-center" style="font-size: 2.5rem">
+      Editar Producto -
+      <span *ngIf="dataProduct[0].code">{{ dataProduct[0].code }}</span>
+    </h2>
+  </div>
+  <div class="section-images m-auto">
+    <h4 class="text-center mt-3">Foto Principal</h4>
+    <div
+      class="main-img m-auto border rounded"
+      style="width: 175px; height: 175px"
+    >
+      <img
+        [src]="urlImgPrincipal.url"
+        alt="No hay imagen principal"
+        style="width: 100%; height: 100%; object-fit: cover"
+      />
+    </div>
+
+    <div class="m-auto w-100 d-flex justify-content-center p-2">
+      <!-- Añade un campo de entrada para archivos múltiples -->
+      <input
+        type="file"
+        (change)="onFileChange($event)"
+        multiple
+        accept="image/*"
+        style="display: none"
+        id="fileInput"
+      />
+      <label for="fileInput" class="btn btn-success"
+        >Cargar Imágenes (.PNG)</label
+      >
+    </div>
+    <div class="list-img_product border rounded p-1 px-3">
+      <b>
+        <p class="text-center">
+          Lista de imagenes (Selecciona la principal)
+        </p></b
+      >
+      <div *ngIf="mensajeError !== ''" class="alert alert-danger" role="alert">
+        <span>{{ mensajeError }}</span>
+      </div>
+
+      <ul class="form-check">
+        <li
+          class="d-flex align-items-center"
+          style="font-size: 13px"
+          *ngFor="let img of listImg"
+        >
+          <input
+            type="radio"
+            class="form-check-input mx-2"
+            name="check-img"
+            style="cursor: pointer; font-size: 18px"
+            (click)="selectImgPrincipal(img)"
+          />
+          <span (click)="selectImgPrincipal(img)"> {{ img.name }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- //formulario de producto -->
+  <div class="container-form p-2">
+    <div class="row mb-2">
+      <div class="col-ms-12 col-md-6">
+        <label for="nombre-producto" class="form-label mb-0"
+          >Nombre Del producto</label
+        >
+        <input
+          formControlName="nombreProduct"
+          type="text"
+          class="form-control"
+          id="nombre-producto"
+        />
+      </div>
+      <div class="col-ms-12 col-md-6">
+        <label for="categorias" class="form-label mb-0"
+          >Categoria Del Producto</label
+        >
+        <select
+          class="form-select"
+          id="categorias"
+          aria-label="Default select example"
+          formControlName="categoriaProduct"
+        >
+          <option selected value="">Selecciona una categoría</option>
+          <option
+            value="{{ categoria.id }}"
+            *ngFor="let categoria of listCategory"
+          >
+            {{ categoria.category_name | titlecase }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-ms-12 col-md-6">
+        <label for="precio-compra" class="form-label mb-0"
+          >Precio De Compra (Sin puntos)</label
+        >
+        <input
+          formControlName="precioCompra"
+          type="number"
+          class="form-control"
+          id="precio-compra"
+        />
+      </div>
+      <div class="col-ms-12 col-md-6">
+        <label for="precio-venta" class="form-label mb-0"
+          >Precio De Venta (Sin puntos)</label
+        >
+        <input
+          formControlName="precioVenta"
+          type="number"
+          class="form-control"
+          id="precio-venta"
+        />
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-ms-12 col-md-6">
+        <label for="precio-Promocion" class="form-label mb-0"
+          >Precio De Promoción (Sin puntos)</label
+        >
+        <input
+          formControlName="precioPromocion"
+          type="number"
+          class="form-control"
+          id="precio-Promocion"
+          (change)="validatePrecioPromocion()"
+        />
+        <div
+          class="text-danger"
+          *ngIf="
+            formCreateProduct.get('precioPromocion')!.invalid &&
+            formCreateProduct.get('precioPromocion')!.touched
+          "
+        >
+          Si se activa promoción este campo es requerido, preferible mayor a
+          {{ this.formCreateProduct.get("precioCompra")!.value }}
+        </div>
+      </div>
+      <div class="col-ms-12 col-md-6">
+        <label for="estado-producto" class="form-label mb-0"
+          >Estado Del Producto</label
+        >
+        <select
+          class="form-select"
+          id="estado-producto"
+          aria-label="Default select example"
+          formControlName="estado"
+        >
+          <option selected value="">Seleciona un estado</option>
+          <option value="{{ estado.id }}" *ngFor="let estado of listEstados">
+            {{ estado.names_state | titlecase }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-ms-12 col-md-6">
+        <label for="ref-fabrica" class="form-label mb-0"
+          >Referencia De Fabrica</label
+        >
+        <input
+          formControlName="referenciaFabrica"
+          type="text"
+          class="form-control"
+          id="ref-fabrica"
+        />
+      </div>
+      <div class="col-ms-12 col-md-6">
+        <label for="proveedor-producto" class="form-label mb-0"
+          >Proveedor Del Producto</label
+        >
+        <select
+          class="form-select"
+          id="proveedor-producto"
+          aria-label="Default select example"
+          formControlName="proveedor"
+        >
+          <option selected value="">Seleciona un proveedor</option>
+          <option
+            value="{{ proveedor.id }}"
+            *ngFor="let proveedor of listProviders"
+          >
+            {{ proveedor.providers_name | titlecase }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-6">
+        <label for="link-mercado_libre" class="form-label mb-0"
+          >Link De Mercado Libre</label
+        >
+        <input
+          formControlName="linkMercadoLibre"
+          type="text"
+          class="form-control"
+          id="link-mercado_libre"
+        />
+      </div>
+
+      <div class="col-6">
+        <div>
+          <label for="linkYoutube" class="form-label mb-0"
+            >Link De Video Youtube</label
+          >
+          <input
+            formControlName="linkYoutube"
+            type="text"
+            class="form-control"
+            id="linkYoutube"
+          />
+        </div>
+      </div>
+      <div class="col-ms-12 col-md-6 mb-1">
+        <label for="proveedor-producto" class="form-label mb-0"
+          >Dueño Del Producto</label
+        >
+        <select
+          class="form-select"
+          id="dueño-producto"
+          aria-label="Default select example"
+          formControlName="owner"
+        >
+          <option selected value="">Seleciona un dueño</option>
+          <option value="{{ owner.id_owner }}" *ngFor="let owner of listOwner">
+            {{ owner.name_owner | titlecase }}
+          </option>
+        </select>
+        <div
+          class="text-danger"
+          *ngIf="
+            formCreateProduct.get('owner')!.invalid &&
+            formCreateProduct.get('owner')!.touched
+          "
+        >
+          Campo requerido
+        </div>
+      </div>
+      <div class="col-2">
+        <div>
+          <label for="stock" class="form-label mb-0">Stock</label>
+          <input
+            formControlName="stock"
+            type="number"
+            class="form-control"
+            id="stock"
+          />
+        </div>
+      </div>
+
+      <div class="col-ms-12 col-md-3 d-flex">
+        <label for=""></label>
+        <div class="">
+          <label class="form-check-label" for="pesoTotal">Peso En Kilos</label>
+          <input
+            formControlName="pesoTotal"
+            class="form-control"
+            type="number"
+            role="switch"
+            id="pesoTotal"
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+              formCreateProduct.get('pesoTotal')!.invalid &&
+              formCreateProduct.get('pesoTotal')!.touched
+            "
+          >
+            Campo requerido
+          </div>
+        </div>
+      </div>
+      <div class="col-ms-12 col-md-3 d-flex mt-2" style="align-items: flex-end">
+        <label for=""></label>
+        <div class="form-check form-switch">
+          <input
+            formControlName="activaPromo"
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="activaPromo"
+            checked
+            (change)="validatePrecioPromocion()"
+          />
+          <label class="form-check-label" for="activaPromo"
+            >¿En Promoción?</label
+          >
+        </div>
+      </div>
+      <div class="col-ms-12 col-md-6 mb-1">
+        <label for="proveedor-producto" class="form-label mb-0"
+          >Etiquetas</label
+        >
+        <div class="d-flex gap-1">
+          <input
+            formControlName="label"
+            list="listProductoUpdate"
+            class="form-control"
+            aria-label="Search"
+            type="text"
+            (keydown)="keyDownEnter($event)"
+          />
+
+          <datalist id="listProductoUpdate">
+            <option
+              *ngFor="let label of dataListLabel"
+              value="{{ label.nombre | titlecase }}"
+            ></option>
+          </datalist>
+
+          <button
+            class="btn btn-success p-0"
+            style="width: 25px"
+            *ngIf="formCreateProduct.get('label')!.value !== ''"
+            (click)="addLabel()"
+          >
+            <span class="material-symbols-outlined"> check </span>
+          </button>
+        </div>
+      </div>
+      <h4 class="text-center mt-2">Listado De Etiquetas</h4>
+      <div class="row mb-1 d-flex gap-1 px-5">
+        <span
+          class="badge text-bg-light text-dark border"
+          style="
+            width: auto;
+            cursor: pointer;
+            padding: 5px 10px;
+            font-size: 1rem;
+          "
+          *ngFor="let label of labelList"
+          (click)="editLabel(label)"
+          >{{ label | titlecase }}</span
+        >
+      </div>
+    </div>
+
+    <!-- //text areas Descripción y  Características-->
+
+    <div class="row mb-2">
+      <label style="align-self: flex-end; padding-left: 0" for="Descripcion"
+        >Descripción</label
+      >
+      <textarea
+        formControlName="descripcion"
+        class="form-control"
+        id="Descripcion"
+        style="min-width: 95%; height: 150px"
+      ></textarea>
+    </div>
+    <div class="row mb-2">
+      <label style="align-self: flex-end; padding-left: 0" for="Caracteristicas"
+        >Características (separadas por ***)</label
+      >
+      <textarea
+        formControlName="caracteristicas"
+        class="form-control"
+        style="min-width: 95%; height: 150px"
+        id="Caracteristicas"
+      ></textarea>
+    </div>
+    <div class="d-flex justify-content-center gap-3 my-3">
+      <button class="btn btn-light">Cancelar</button>
+      <button class="btn btn-primary" (click)="onSubmit()">Guardar</button>
+    </div>
+  </div>
+</div>

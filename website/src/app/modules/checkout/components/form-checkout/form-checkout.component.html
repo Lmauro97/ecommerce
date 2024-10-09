@@ -1,0 +1,312 @@
+<form class="container container-main" [formGroup]="formCheckout">
+  <div class="billing-details">
+    <h3 class="d-flex align-items-center">
+      Detalles De Facturación
+      <span class="material-symbols-outlined mx-2"> receipt_long </span>
+    </h3>
+    <div class="items-detail">
+      <div class="mb-3">
+        <label for="Nombre" class="form-label"
+          >Nombres<span class="text-danger">*</span></label
+        >
+        <input
+          formControlName="nombre"
+          type="text"
+          class="form-control"
+          id="Nombre"
+          placeholder="Nombre"
+        />
+        <div
+          *ngIf="
+            formCheckout.get('nombre')!.invalid &&
+            formCheckout.get('nombre')!.touched
+          "
+          class="text-danger"
+        >
+          Campo requerido
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="apellido" class="form-label"
+          >Apellidos<span class="text-danger">*</span></label
+        >
+        <input
+          formControlName="apellido"
+          type="text"
+          class="form-control"
+          id="apellido"
+          placeholder="Apellidos"
+        />
+        <div
+          *ngIf="
+            formCheckout.get('apellido')!.invalid &&
+            formCheckout.get('apellido')!.touched
+          "
+          class="text-danger"
+        >
+          Campo requerido
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="correo_checkout" class="form-label"
+          >Correo<span class="text-danger">*</span></label
+        >
+        <input
+          formControlName="email"
+          type="email"
+          class="form-control"
+          id="correo_checkout"
+          placeholder="name@example.com"
+        />
+        <div
+          *ngIf="
+            formCheckout.get('email')!.invalid &&
+            formCheckout.get('email')!.touched
+          "
+          class="text-danger"
+        >
+          Campo requerido
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="telefono_checkout" class="form-label"
+          >Telefono<span class="text-danger">*</span></label
+        >
+        <input
+          formControlName="telefono"
+          type="number"
+          class="form-control"
+          id="telefono_checkout"
+          placeholder="1234567890"
+          (change)="validateNumber('telefono')"
+        />
+        <div
+          *ngIf="
+            formCheckout.get('telefono')!.invalid &&
+            formCheckout.get('telefono')!.touched
+          "
+          class="text-danger"
+        >
+          Campo requerido
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Tipo Documento*</label>
+        <select formControlName="TipDocumento" class="form-select">
+          <option value="" selected disabled>Selecciona una opción</option>
+          <option *ngFor="let tipo of typeIdentyti" value="{{ tipo.id }}">
+            {{ tipo.names_card }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            formCheckout.get('TipDocumento')!.invalid &&
+            formCheckout.get('TipDocumento')!.touched
+          "
+          class="text-danger"
+        >
+          Campo requerido
+        </div>
+      </div>
+      <div class="">
+        <label for="document" class="form-label"
+          >N° De Documento<span class="text-danger">*</span></label
+        >
+        <input
+          formControlName="numDocumento"
+          type="number"
+          class="form-control"
+          id="document"
+          placeholder="1234567890"
+          (change)="validateNumber('numDocumento')"
+        />
+        <div
+          *ngIf="
+            formCheckout.get('numDocumento')!.invalid &&
+            formCheckout.get('numDocumento')!.touched
+          "
+          class="text-danger"
+        >
+          Campo requerido
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="shipping-info mt-3">
+    <h3 class="d-flex align-items-center mb-2">
+      Datos de envío
+      <span class="material-symbols-outlined mx-2"> forward_to_inbox </span>
+    </h3>
+    <div class="items-info">
+      <div>
+        <label class="form-label"
+          >Departamento <span class="text-danger">*</span></label
+        >
+        <select
+          #departamento
+          formControlName="departamento"
+          class="form-select mb-1"
+          (change)="filterCitys(departamento.value)"
+        >
+          <option value="" disabled>Selecciona El Departamento</option>
+          <option
+            *ngFor="let departamento of listDepartament"
+            value="{{ departamento.id }}"
+          >
+            {{ departamento.names_department | titlecase }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            formCheckout.get('departamento')!.invalid &&
+            formCheckout.get('departamento')!.touched
+          "
+          class="text-danger"
+        >
+          Campo requerido
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label"
+          >Ciudad <span class="text-danger">*</span></label
+        >
+        <select
+          formControlName="ciudad"
+          class="form-select mb-1"
+          aria-label="Default select example"
+          (change)="selectCyti()"
+        >
+          <option value="" disabled>Selecciona El Ciudad</option>
+          <option *ngFor="let city of filterCity" value="{{ city.id }}">
+            {{ city.name_city | titlecase }}
+          </option>
+        </select>
+
+        <div
+          *ngIf="
+            formCheckout.get('ciudad')!.invalid &&
+            formCheckout.get('ciudad')!.touched
+          "
+          class="text-danger"
+        >
+          Campo requerido
+        </div>
+      </div>
+      <div class="mb-2">
+        <label for="address" class="form-label"
+          >Dirección De Entrega <span class="text-danger">*</span></label
+        >
+        <input
+          formControlName="direccion"
+          type="text"
+          class="form-control"
+          id="address"
+          placeholder="carrera 12 # 12-12"
+        />
+        <div
+          *ngIf="
+            formCheckout.get('direccion')!.invalid &&
+            formCheckout.get('direccion')!.touched
+          "
+          class="text-danger"
+        >
+          Campo requerido
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="refencia" class="form-label">Refencia</label>
+        <input
+          formControlName="refencia"
+          type="text"
+          class="form-control"
+          id="refencia"
+          placeholder="Casa azul, entregar en el piso 2"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="payment-details">
+    <h3 class="d-flex align-items-center mb-2">
+      Detalles Del Pago
+      <span class="material-symbols-outlined mx-2"> credit_card </span>
+    </h3>
+    <label class="form-label">Método De Pago*</label>
+    <div class="form-check form-switch">
+      <input
+        formControlName="mercadoPago"
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        (change)="metodoPago('mercadoPago')"
+      />
+      <label class="form-check-label" for="mercado-pago">Mercado Pago </label>
+      <img src="../assets/img/mercado-pago.png " alt="" width="50" />
+    </div>
+    <div class="form-check form-switch">
+      <input
+        formControlName="contraentrega"
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="contraentrega"
+        (change)="metodoPago('contraentrega')"
+      />
+      <label class="form-check-label" for="contraentrega"
+        >Pago Contra Entrega
+      </label>
+    </div>
+  </div>
+
+  <div
+    class="w-100 d-flex justify-content-center d-flex align-items-center"
+    style="flex-direction: column"
+  >
+    <div
+      *ngIf="formCheckout.invalid && formCheckout.touched"
+      class="alert alert-danger d-flex justify-content-center m-0 p-1 mt-1 w-100"
+      role="alert"
+      style="max-height: 50px"
+    >
+      El formulario no es válido
+    </div>
+    <div
+      *ngIf="mensajePagoContra !== ''"
+      class="alert alert-info d-flex justify-content-center m-0 p-1 mt-1 w-100"
+      role="alert"
+    >
+      <p class="text-center">{{ mensajePagoContra }}</p>
+    </div>
+    <div
+      *ngIf="msmAlertas !== ''"
+      class="alert alert-danger d-flex justify-content-center m-0 p-1 mt-1 w-100"
+      role="alert"
+    >
+      <p class="text-center">{{ msmAlertas }}</p>
+    </div>
+    <div>
+      <button
+        [disabled]="!btnPagar_status"
+        #btnPagar
+        type="button"
+        class="btn-pagar mt-2 P-1"
+        (click)="pagar()"
+        style="min-width: 200px; font-size: 18px; color: #000000"
+        [disabled]="alertProductoNoStock !== ''"
+        [ngStyle]="{
+          'background-color': alertProductoNoStock !== '' ? '#d3d3d3' : ''
+        }"
+      >
+        Pagar
+      </button>
+    </div>
+    <p
+      class="text-center"
+      style="color: red; font-size: large"
+      *ngIf="alertProductoNoStock !== ''"
+    >
+      {{ alertProductoNoStock }}
+    </p>
+  </div>
+</form>

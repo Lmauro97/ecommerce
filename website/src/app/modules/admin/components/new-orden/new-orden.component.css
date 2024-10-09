@@ -1,0 +1,45 @@
+* {
+  color: #1a1515;
+}
+.btn-crear {
+  background: linear-gradient(
+    128.49deg,
+    rgb(203, 60, 255) 19.86%,
+    rgb(127, 37, 251) 68.34%
+  );
+  color: white;
+  height: 35px;
+  padding: 3px;
+  font-size: 16px;
+  font-family: cursive;
+}
+
+.btn-crear_user {
+  background: linear-gradient(
+    128.49deg,
+    rgb(60, 177, 255) 19.86%,
+    rgb(12, 252, 220) 68.34%
+  );
+  height: 35px;
+  padding: 3px;
+  p {
+    color: rgb(255, 255, 255);
+    font-size: 17px;
+    font-family: cursive;
+  }
+  color: rgb(255, 255, 255);
+  font-size: 17px;
+  font-family: cursive;
+}
+h1 {
+  font-family: cursive;
+  font-size: 30px;
+  color: #1a1515;
+}
+
+.items-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-row: auto;
+  gap: 5px;
+}

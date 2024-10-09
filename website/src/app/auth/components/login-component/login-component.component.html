@@ -1,0 +1,163 @@
+<div>
+  <!-- Button trigger modal -->
+
+  <button
+    #modalLogin
+    type="button"
+    class="btn p-0"
+    data-bs-toggle="modal"
+    data-bs-target="#modalLogin"
+  >
+    <p class="m-0 p-0" style="color: #fff">Ingresa</p>
+  </button>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="modalLogin"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content mt-5">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="formLogin.reset()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <div class="d-flex justify-content-center">
+              <img
+                src="./assets/img/logos pagina/imagen(2).png"
+                alt="Compra Todo Online"
+                width="150px"
+                style="color: #000000"
+              />
+            </div>
+            <h2
+              class="text-center my-4 mb-5"
+              style="color: #000000; font-size: 1.9rem"
+            >
+              Iniciar sesión con tu cuenta
+            </h2>
+          </div>
+
+          <form [formGroup]="formLogin" autocomplete="off">
+            <div class="mb-3">
+              <label class="form-label m-0 p-0" style="color: #525050"
+                >Dirección De Correo Electrónico</label
+              >
+              <input
+                formControlName="correo"
+                type="email"
+                class="form-control"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                autocomplete="false"
+                (input)="correoMinusculas($event)"
+              />
+              <div
+                *ngIf="
+                  formLogin.get('correo')!.invalid &&
+                  formLogin.get('correo')!.touched
+                "
+                class="text-danger"
+              >
+                Campo requerido, y debe tener la estructura de correo
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label
+                for="passUser"
+                class="form-label m-0 p-0"
+                style="color: #525050"
+                >Contraseña</label
+              >
+              <input
+                autocomplete="false"
+                type="password"
+                class="form-control"
+                id="passUser"
+                formControlName="pass"
+              />
+              <div
+                *ngIf="
+                  formLogin.get('pass')!.invalid &&
+                  formLogin.get('pass')!.touched
+                "
+                class="text-danger"
+              >
+                Campo requerido
+              </div>
+            </div>
+            <div
+              class="alert"
+              [ngClass]="{
+                'alert-success': mensajeError === 'Login Exitoso!',
+                'alert-danger': mensajeError !== 'Login Exitoso!'
+              }"
+              role="alert"
+              *ngIf="mensajeError !== ''"
+            >
+              <p class="text-center" style="font-size: 1.2rem">
+                {{ mensajeError }}
+              </p>
+            </div>
+          </form>
+          <div class="d-flex p-3" style="justify-content: space-between">
+            <button
+              (click)="openModalRemember()"
+              style="
+                border: none;
+                background-color: #ffffff;
+                color: #0b5ed7;
+                font-size: 1.1rem;
+              "
+            >
+              ¿Has olvidado tu contraseña?
+            </button>
+
+            <button
+              (click)="openModalRegister()"
+              style="
+                border: none;
+                background-color: #ffffff;
+                color: #0b5ed7;
+                font-size: 1.1rem;
+              "
+            >
+              ¿No estas registrado?
+            </button>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button
+            #modalFormLogin
+            type="button"
+            class="btn btn-light"
+            data-bs-dismiss="modal"
+            style="border: solid 0.5px #646262"
+            (click)="formLogin.reset()"
+          >
+            Cancelar
+          </button>
+          <button
+            class="btn btn-primary"
+            style="font-size: 1.2rem"
+            (click)="sendDataLogin()"
+          >
+            Iniciar Sesión
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

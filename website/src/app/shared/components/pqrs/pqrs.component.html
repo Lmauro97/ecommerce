@@ -1,0 +1,119 @@
+<!-- Button trigger modal -->
+<button
+  type="button"
+  class="btn p-0"
+  data-bs-toggle="modal"
+  data-bs-target="#modalPqrs"
+>
+  <p style="color: #ffffff; padding-bottom: 5px">Ayuda/PQR</p>
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="modalPqrs"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <form class="modal-content" [formGroup]="formPqrs">
+      <div class="modal-header">
+        <h1
+          class="modal-title fs-5"
+          id="staticBackdropLabel"
+          style="color: #000"
+        >
+          Formulario para PQRS
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-1">
+          <label class="form-label text-dark mb-0">Tipo De Solicitud</label>
+          <select class="form-control" formControlName="tipoSolicitud">
+            <!-- <option value="">Selecciona una opción</option> -->
+            <option
+              value="{{ pqrs.id_type_pqrs }}"
+              *ngFor="let pqrs of listPqrs"
+            >
+              {{ pqrs.name_type }}
+            </option>
+          </select>
+          <div
+            class="text-danger"
+            *ngIf="
+              formPqrs.get('tipoSolicitud')!.invalid &&
+              formPqrs.get('tipoSolicitud')!.touched
+            "
+          >
+            Campo requerido
+          </div>
+        </div>
+        <div class="mb-1">
+          <label class="form-text text-dark mb-0">Detalle Tramite</label>
+          <textarea
+            formControlName="detalleTramite"
+            class="form-control"
+            style="height: 100px"
+          ></textarea>
+
+          <div
+            class="text-danger"
+            *ngIf="
+              formPqrs.get('detalleTramite')!.invalid &&
+              formPqrs.get('detalleTramite')!.touched
+            "
+          >
+            Campo requerido
+          </div>
+        </div>
+        <div class="mb-1">
+          <label class="form-label text-dark mb-0">Adjuntar Documento</label>
+          <input
+            formControlName="file"
+            class="form-control"
+            type="file"
+            (change)="onFileChange($event)"
+          />
+
+          <div
+            class="text-danger"
+            *ngIf="
+              formPqrs.get('file')!.invalid && formPqrs.get('file')!.touched
+            "
+          >
+            Campo requerido
+          </div>
+        </div>
+        <div class="text-danger" *ngIf="mensajeError !== ''">
+          {{ mensajeError }}
+        </div>
+        <div *ngIf="smsResp !== ''">
+          <p class="text-dark">{{ smsResp }}</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          (click)="limpiarFor()"
+          #closeBtn
+        >
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-primary" (click)="sendForm()">
+          Enviar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

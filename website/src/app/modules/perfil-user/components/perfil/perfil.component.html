@@ -1,0 +1,260 @@
+<div class="main-app-perfil border">
+  <section style="background-color: #eee">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-lg-4">
+          <!-- foto de perfil y roles -->
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <div style="display: grid; justify-items: center">
+                <img
+                  [src]="dataUserPerfil.photo"
+                  alt="avatar"
+                  class="rounded-circle img-fluid"
+                  style="width: 150px"
+                />
+
+                <!-- Input oculto para subir archivos -->
+                <input
+                  type="file"
+                  #fileInput
+                  style="display: none"
+                  (change)="onFileSelected($event)"
+                />
+
+                <svg
+                  style="cursor: pointer"
+                  aria-hidden="true"
+                  width="25"
+                  height="25"
+                  viewBox="0 0 20 20"
+                  fill="rgba(0, 0, 0, 0.9)"
+                  (click)="openFileInput()"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M11.8 14.2234C14.1353 14.2234 16.0284 12.3303 16.0284 9.99504C16.0284 7.65977 14.1353 5.76665 11.8 5.76665C9.46473 5.76665 7.57161 7.65977 7.57161 9.99504C7.57161 12.3303 9.46473 14.2234 11.8 14.2234ZM11.8 13.0234C10.1275 13.0234 8.77161 11.6676 8.77161 9.99504C8.77161 8.32251 10.1275 6.96665 11.8 6.96665C13.4725 6.96665 14.8284 8.32251 14.8284 9.99504C14.8284 11.6676 13.4725 13.0234 11.8 13.0234Z"
+                    fill="rgba(0, 0, 0, 0.9)"
+                  ></path>
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M16.3165 4.59504H19V14.8C19 15.7942 18.1941 16.6 17.2 16.6H2.8C1.80589 16.6 1 15.7942 1 14.8V6.39504C1 5.40093 1.80589 4.59504 2.8 4.59504H7.26123L8.48032 2.84106H15.1165L16.3165 4.59504ZM9.10765 4.04106L7.88856 5.79504H2.8C2.46863 5.79504 2.2 6.06367 2.2 6.39504V14.8C2.2 15.1314 2.46863 15.4 2.8 15.4H17.2C17.5314 15.4 17.8 15.1314 17.8 14.8V5.79504H15.6835L14.4835 4.04106H9.10765Z"
+                    fill="rgba(0, 0, 0, 0.9)"
+                  ></path>
+                </svg>
+                <!-- mensaje de error -->
+                <div class="alert alert-danger" *ngIf="errorImg">
+                  <small>{{ msmErrorImg }}</small>
+                </div>
+              </div>
+              <h5 class="my-3">
+                {{ dataUserPerfil.names }} {{ dataUserPerfil.last_name }}
+              </h5>
+
+              <!-- roles -->
+              <div class="d-flex my-2 justify-content-center gap-2">
+                <span
+                  class="badge"
+                  style="
+                    background-color: #aa45f7b8;
+                    color: #ffffff;
+                    border: solid 0.5px #dace30;
+                  "
+                  *ngFor="let rol of rolesUser | keyvalue; let i = index"
+                >
+                  {{ rolesUser[rol.key] }}</span
+                >
+              </div>
+
+              <div class="d-flex justify-content-center mb-2">
+                <app-form-edit-perfil></app-form-edit-perfil>
+              </div>
+            </div>
+          </div>
+
+          <!-- listado de opciones -->
+          <div class="card mb-4 mb-lg-0">
+            <div class="card-body p-0">
+              <ul class="list-group list-group-flush rounded-3">
+                <li
+                  class="list-group-item d-flex justify-content-center align-items-center p-3"
+                  style="cursor: pointer"
+                  (click)="activateOption('tracking')"
+                  [ngStyle]="{
+                    'background-color': tracking
+                      ? 'rgba(13, 110, 253, 0.25)'
+                      : ''
+                  }"
+                >
+                  <i class="fas fa-globe fa-lg text-warning"></i>
+                  <p class="mb-0">Seguimiento De Compras</p>
+                </li>
+
+                <li
+                  class="list-group-item d-flex justify-content-center align-items-center p-3"
+                  style="cursor: pointer"
+                  (click)="activateOption('deliveries')"
+                  [ngStyle]="{
+                    'background-color': deliveries
+                      ? 'rgba(13, 110, 253, 0.25)'
+                      : ''
+                  }"
+                >
+                  <i class="fab fa-instagram fa-lg" style="color: #ac2bac"></i>
+                  <p class="mb-0">Entregas</p>
+                </li>
+
+                <li
+                  class="list-group-item d-flex justify-content-center align-items-center p-3"
+                  style="cursor: pointer"
+                  (click)="activateOption('billing')"
+                  [ngStyle]="{
+                    'background-color': billing
+                      ? 'rgba(13, 110, 253, 0.25)'
+                      : ''
+                  }"
+                >
+                  <i class="fab fa-github fa-lg" style="color: #333333"></i>
+                  <p class="mb-0">Facturación</p>
+                </li>
+                <li
+                  class="list-group-item d-flex justify-content-center align-items-center p-3"
+                  style="cursor: pointer"
+                  (click)="activateOption('pqrs_user')"
+                  [ngStyle]="{
+                    'background-color': pqrs_user
+                      ? 'rgba(13, 110, 253, 0.25)'
+                      : ''
+                  }"
+                >
+                  <i class="fab fa-twitter fa-lg" style="color: #55acee"></i>
+                  <p class="mb-0 t">Pqrs</p>
+                </li>
+                <!-- <li
+                  class="list-group-item d-flex justify-content-center align-items-center p-3"
+                  style="cursor: pointer"
+                  (click)="activateOption('returns_user')"
+                  [ngStyle]="{
+                    'background-color': returns_user
+                      ? 'rgba(13, 110, 253, 0.25)'
+                      : ''
+                  }"
+                >
+                  <i class="fab fa-twitter fa-lg" style="color: #55acee"></i>
+                  <p class="mb-0">Solicitar Devolución</p>
+                </li> -->
+              </ul>
+            </div>
+          </div>
+          <!-- Mostrar opcion en movil-->
+          <div class="mt-3 option_movil">
+            <app-purchase-tracking *ngIf="tracking"> </app-purchase-tracking>
+            <app-billing *ngIf="billing"></app-billing>
+            <app-pqrs-user *ngIf="pqrs_user"></app-pqrs-user>
+            <app-deliveries-user *ngIf="deliveries"></app-deliveries-user>
+            <app-returns-user *ngIf="returns_user"></app-returns-user>
+          </div>
+        </div>
+
+        <!-- datos del usuario -->
+        <div class="col-lg-8">
+          <div class="card mb-4" style="min-height: 231px">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Nombres y Apellidos</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">
+                    {{ dataUserPerfil.names }} {{ dataUserPerfil.last_name }}
+                  </p>
+                </div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Correo</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ dataUserPerfil.mail }}</p>
+                </div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Telafono</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ dataUserPerfil.phone }}</p>
+                </div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">N° De Identificación</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">
+                    {{ dataUserPerfil.identification_card }}
+                  </p>
+                </div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Tipo De Identificación</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">
+                    {{ dataUserPerfil.tipo_identificacion }}
+                  </p>
+                </div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Dirección De Entrega</p>
+                </div>
+                <div class="col-sm-9 d-flex gap-3 justify-content-center">
+                  <p class="text-muted mb-0">
+                    Departamento: {{ dataUserPerfil.names_department }} -
+                  </p>
+                  <p class="text-muted mb-0">
+                    Ciudad: {{ dataUserPerfil.name_city }} -
+                  </p>
+                  <p class="text-muted mb-0">{{ dataUserPerfil.address }}</p>
+                </div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Estado</p>
+                </div>
+                <div class="col-sm-9">
+                  <p
+                    class="text-muted mb-0 text-center"
+                    [ngClass]="{
+                      'bg-success': dataUserPerfil.estado === 'Activo'
+                    }"
+                    style="color: #ffffff !important; width: 100px"
+                  >
+                    {{ dataUserPerfil.estado }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row option_desktop">
+            <app-purchase-tracking *ngIf="tracking"> </app-purchase-tracking>
+            <app-billing *ngIf="billing"></app-billing>
+            <app-pqrs-user *ngIf="pqrs_user"></app-pqrs-user>
+            <app-deliveries-user *ngIf="deliveries"></app-deliveries-user>
+            <app-returns-user *ngIf="returns_user"></app-returns-user>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

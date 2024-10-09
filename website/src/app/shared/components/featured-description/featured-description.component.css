@@ -1,0 +1,180 @@
+/* estilos mobil */
+.main-featured {
+  width: 327px;
+  height: 698px;
+  flex-shrink: 0;
+  margin: auto;
+  display: grid;
+  margin-top: 100px;
+  margin-bottom: 100px;
+
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 150px 1fr;
+}
+
+.img-featured {
+  margin: auto;
+  width: 327px;
+  height: 300px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: url(../../../../assets/img/mobil/img-featured-mobil.png) 0px 0px /
+    100% 100% no-repeat;
+  background-position: center;
+  background-size: auto;
+  background-repeat: no-repeat;
+  justify-content: center;
+  gap: 10px;
+}
+
+.title-featured {
+  width: 327px;
+  color: #000;
+  margin: auto;
+  text-align: center;
+  font-family: Manrope;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.color-text {
+  color: #d87d4a;
+  font-family: Manrope;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.text-featured {
+  width: 327px;
+  margin: auto;
+}
+
+/* estilos de tablet */
+
+@media (min-width: 738px) and (max-width: 1024px) {
+  .main-featured {
+    width: 689px;
+    flex-shrink: 0;
+    margin: auto;
+    display: grid;
+    margin-bottom: 100px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 118px 151px;
+  }
+  .img-featured {
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: url(../../../../assets/img/tablet/img-featured-tablet.png) 0px
+      0px / 100% 100% no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    justify-content: center;
+    gap: 10px;
+  }
+  .title-featured {
+    width: 573px;
+    color: #000;
+    text-align: center;
+    font-family: Manrope;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 44px; /* 110% */
+    letter-spacing: 1.429px;
+    text-transform: uppercase;
+  }
+  .color-text {
+    color: #d87d4a;
+    font-family: Manrope;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 44px;
+    letter-spacing: 1.429px;
+    text-transform: uppercase;
+  }
+  .text-featured {
+    width: 573px;
+    color: #000;
+    text-align: center;
+    font-family: Manrope;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 25px; /* 166.667% */
+    opacity: 0.5;
+  }
+}
+
+/* estilos de tablet */
+
+/* estilos de desktop */
+
+@media (min-width: 1024px) {
+  .main-featured {
+    width: 1110px;
+    height: 363px;
+    flex-shrink: 0;
+    margin: auto;
+    display: grid;
+    margin-bottom: 100px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  .img-featured {
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: url(../../../../assets/img/desktop/img-featured.png) 0px 0px /
+      100% 100% no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    justify-content: center;
+    gap: 10px;
+    grid-area: 1/2/3/3;
+  }
+  .title-featured {
+    width: 445px;
+    color: #000;
+    font-family: Manrope;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 44px; /* 110% */
+    letter-spacing: 1.429px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .color-text {
+    color: #d87d4a;
+    font-family: Manrope;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 44px;
+    letter-spacing: 1.429px;
+    text-transform: uppercase;
+  }
+  .text-featured {
+    width: 445px;
+    color: #000;
+    font-family: Manrope;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 25px; /* 166.667% */
+  }
+}

@@ -1,0 +1,346 @@
+<div>
+  <!-- Button trigger modal -->
+
+  <button
+    #modalRegistroUser
+    type="button"
+    class="btn p-0"
+    data-bs-toggle="modal"
+    data-bs-target="#modalRegistroUser"
+  >
+    <p class="m-0 p-0" style="color: #fff">Registrar Cuenta</p>
+  </button>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="modalRegistroUser"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" style="color: black">
+            Formulario De Registro
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <form class="modal-body" [formGroup]="formRegistro">
+          <!-- este es el body del carrito -->
+          <div class="row w-100 mt-1">
+            <div class="mb-1 col-sm-6">
+              <label for="nombres" class="form-label mb-0">Nombres</label>
+              <input
+                formControlName="nombres"
+                type="text"
+                class="form-control"
+                id="nombres"
+              />
+              <p
+                *ngIf="
+                  formRegistro.get('nombres')?.invalid &&
+                  formRegistro.get('nombres')?.touched
+                "
+                style="color: red"
+              >
+                campo requerido
+              </p>
+            </div>
+            <div class="mb-1 col-sm-6">
+              <label for="apellidos" class="form-label mb-0">Apellidos</label>
+              <input
+                formControlName="apellidos"
+                type="text"
+                class="form-control"
+                id="apellidos"
+              />
+              <p
+                *ngIf="
+                  formRegistro.get('apellidos')?.invalid &&
+                  formRegistro.get('apellidos')?.touched
+                "
+                style="color: red"
+              >
+                campo requerido
+              </p>
+            </div>
+          </div>
+
+          <div class="row w-100">
+            <div class="mb-1 col-sm-7">
+              <label for="correoRegis" class="form-label mb-0">Correo</label>
+              <input
+                formControlName="correo"
+                type="email"
+                class="form-control"
+                id="correoRegis"
+              />
+              <p
+                *ngIf="
+                  formRegistro.get('correo')?.invalid &&
+                  formRegistro.get('correo')?.touched
+                "
+                style="color: red"
+              >
+                correo no valido
+              </p>
+            </div>
+            <div class="mb-1 col-sm-5">
+              <label for="telefono" class="form-label mb-0">Telefono</label>
+              <input
+                formControlName="telefono"
+                type="number"
+                class="form-control"
+                id="telefono"
+                (change)="validateNumber('telefono')"
+              />
+              <p
+                *ngIf="
+                  formRegistro.get('telefono')?.invalid &&
+                  formRegistro.get('telefono')?.touched
+                "
+                style="color: red"
+              >
+                campo requerido
+              </p>
+            </div>
+          </div>
+
+          <div class="row w-100">
+            <div class="mb-1 col-sm-6">
+              <label for="tipoDoc" class="form-label mb-0"
+                >Tipo De Documento</label
+              >
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                id="tipoDoc"
+                formControlName="tipoDoc"
+              >
+                <option value="" selected disabled>
+                  Selecciona una opción
+                </option>
+                <option *ngFor="let tipo of typeIdentyti" value="{{ tipo.id }}">
+                  {{ tipo.names_card }}
+                </option>
+              </select>
+              <p
+                *ngIf="
+                  formRegistro.get('tipoDoc')?.invalid &&
+                  formRegistro.get('tipoDoc')?.touched
+                "
+                style="color: red"
+              >
+                campo requerido
+              </p>
+            </div>
+            <div class="mb-1 col-sm-6">
+              <label for="numberDocument" class="form-label mb-0"
+                >N° De Documento</label
+              >
+              <input
+                formControlName="numDocumento"
+                type="number"
+                class="form-control"
+                id="numberDocument"
+                (change)="validateNumber('numDocumento')"
+              />
+              <p
+                *ngIf="
+                  formRegistro.get('numDocumento')?.invalid &&
+                  formRegistro.get('numDocumento')?.touched
+                "
+                style="color: red"
+              >
+                campo requerido
+              </p>
+            </div>
+          </div>
+
+          <div class="row w-100">
+            <div class="mb-1 col-sm-6">
+              <label for="direccion" class="form-label mb-0">Dirección</label>
+              <input
+                formControlName="direccion"
+                type="text"
+                class="form-control"
+                id="direccion"
+              />
+              <p
+                *ngIf="
+                  formRegistro.get('direccion')?.invalid &&
+                  formRegistro.get('direccion')?.touched
+                "
+                style="color: red"
+              >
+                campo requerido
+              </p>
+            </div>
+            <div class="mb-1 col-sm-6">
+              <label for="departamento" class="form-label mb-0"
+                >Departamento</label
+              >
+              <select
+                #departamento
+                class="form-select"
+                aria-label="Default select example"
+                id="departamento"
+                formControlName="departamento"
+                (change)="filterCitys(departamento.value)"
+              >
+                <option value="" disabled>Selecciona El Departamento</option>
+                <option
+                  *ngFor="let departamento of listDepartament"
+                  value="{{ departamento.id }}"
+                >
+                  {{ departamento.names_department | titlecase }}
+                </option>
+              </select>
+              <p
+                *ngIf="
+                  formRegistro.get('departamento')?.invalid &&
+                  formRegistro.get('departamento')?.touched
+                "
+                style="color: red"
+              >
+                campo requerido
+              </p>
+            </div>
+          </div>
+
+          <div class="row w-100">
+            <div class="mb-1 col-sm-6">
+              <label for="ciudad" class="form-label mb-0">Ciudad</label>
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                id="ciudad"
+                formControlName="ciudad"
+              >
+                <option value="" disabled>Selecciona El Ciudad</option>
+                <option *ngFor="let city of filterCity" value="{{ city.id }}">
+                  {{ city.name_city | titlecase }}
+                </option>
+              </select>
+              <p
+                *ngIf="
+                  formRegistro.get('ciudad')?.invalid &&
+                  formRegistro.get('ciudad')?.touched
+                "
+                style="color: red"
+              >
+                campo requerido
+              </p>
+            </div>
+            <div class="mb-1 col-sm-6">
+              <label for="foto" class="form-label mb-0">Foto De Perfil</label>
+              <input
+                formControlName="foto"
+                type="file"
+                class="form-control"
+                id="foto"
+                accept="image/*"
+                (change)="onFileChange($event)"
+              />
+            </div>
+          </div>
+          <div class="row w-100">
+            <div class="mb-2 col-sm-6 form-check form-switch mx-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="terminos"
+                formControlName="terminos"
+              />
+              <label class="form-check-label" for="terminos"
+                >Terminos Y Condiciones</label
+              >
+            </div>
+          </div>
+
+          <div
+            *ngIf="foto"
+            style="
+              width: 100px;
+              height: 100px;
+              margin: auto;
+              margin-top: 15px;
+              border: solid 1px #dace30;
+              background-image: url('{{ foto }}');
+              background-size: cover;
+              background-position: center;
+              
+            "
+          ></div>
+
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="mensajeError === 'Formulario No Valido'"
+          >
+            {{ mensajeError }}
+          </div>
+          <div
+            class="alert alert-info"
+            role="alert"
+            *ngIf="mensajeRegisterCorreo !== ''"
+          >
+            {{ mensajeRegisterCorreo }}
+          </div>
+
+          <div
+            class="alert alert-success"
+            [ngClass]="{
+              'alert-danger': mensajeRegister !== 'Usuario Registrado'
+            }"
+            role="alert"
+            *ngIf="mensajeRegister !== ''"
+          >
+            {{ mensajeRegister }}
+          </div>
+          mensajeNoterminos
+          <div
+            class="alert alert-info"
+            role="alert"
+            *ngIf="mensajeNoterminos !== ''"
+          >
+            {{ mensajeNoterminos }}
+          </div>
+
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="mensajeError === 'Solo se permiten archivos PNG'"
+          >
+            {{ mensajeError }}
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button
+            #checkoutLink
+            type="button"
+            class="btn btn-light"
+            data-bs-dismiss="modal"
+            style="border: solid 0.5px #646262"
+          >
+            Cancelar
+          </button>
+
+          <button class="btn btn-primary" (click)="sendRegistro()">
+            Enviar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

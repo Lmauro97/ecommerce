@@ -1,0 +1,76 @@
+<!-- Button trigger modal -->
+
+<button
+  type="button"
+  #modalInfo
+  data-bs-toggle="modal"
+  data-bs-target="#modalInfo"
+  style="display: none"
+></button>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="modalInfo"
+  tabindex="-1"
+  aria-labelledby="modalInfoLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalInfoLabel">
+          Información de factura N°: {{ numberfactura }}
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <ul
+          style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px"
+          *ngIf="data"
+        >
+          <li>
+            <strong style="display: inline"> Id de la compra: </strong>
+            {{ data.id }}
+          </li>
+          <li>
+            <strong> Fecha: </strong>
+            {{ data.date_register | date : "dd/MM/yyyy" }}
+          </li>
+          <li><strong> Estado del pago: </strong> {{ data.pago }}</li>
+          <li><strong> Entrega: </strong>{{ data.delivery }}</li>
+          <li><strong> Nombres facturación: </strong> {{ data.nombre }}</li>
+          <li>
+            <strong> Usuario registrado: </strong>{{ data.userComprador }}
+          </li>
+          <li><strong> Tipo documento: </strong>{{ data.names_card }}</li>
+          <li><strong> Documento: </strong>{{ data.card_buyer }}</li>
+          <li><strong> Telefono: </strong>{{ data.phone_buyer }}</li>
+          <li><strong> Correo: </strong>{{ data.mail_buyer }}</li>
+          <li>
+            <strong> Departamento: </strong
+            >{{ data.names_department | lowercase }}
+          </li>
+          <li><strong> Ciudad: </strong>{{ data.city }}</li>
+          <li><strong> Dirección: </strong>{{ data.address_delivery }}</li>
+          <li><strong> Tipo de pago: </strong>{{ data.type_pay }}</li>
+          <li>
+            <strong> Valor del envio: </strong>{{ data.shipments | currency }}
+          </li>
+          <li>
+            <strong>Referencia de pago:</strong>{{ data.payment_reference }}
+          </li>
+          <li><strong>Productos: </strong>{{ data.products }}</li>
+          <li>
+            <strong>Referencia de entrega: </strong
+            >{{ data.delivery_reference }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

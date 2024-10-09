@@ -1,0 +1,138 @@
+<h1 style="text-align: right">Listado de ordenes</h1>
+<hr />
+<h3>Lista de usuarios</h3>
+
+<!-- buscador -->
+<div class="main-search mb-1">
+  <div class="d-flex">
+    <input
+      #searchInput
+      style="width: 300px; border-radius: 8px 0px 0px 8px"
+      class="form-control px-2"
+      type="text"
+      placeholder="Buscar orden"
+      (input)="searchUser(searchInput.value)"
+    />
+    <button
+      class="btn btn-light"
+      style="border-radius: 0px 8px 8px 0px; height: 35px"
+      (click)="clearSearch()"
+    >
+      <img src="../assets/img/limpiar.png" alt="icono limpiar" width="22" />
+    </button>
+  </div>
+  <div>
+    <input
+      #searchDateInput
+      class="form-control"
+      type="date"
+      (input)="searchDate(searchDateInput.value)"
+    />
+  </div>
+  <app-register-user class="btn-crear_user btn"></app-register-user>
+</div>
+
+<div id="scrollDiv" style="overflow-x: scroll; max-height: 76dvh; padding: 0px">
+  <table class="table m-0">
+    <thead>
+      <tr>
+        <th class="px-2 bg-success-subtle" scope="col">Nombre</th>
+        <th class="px-2 bg-success-subtle" scope="col">Apellido</th>
+        <th class="px-2 bg-success-subtle" scope="col">Correo</th>
+        <th class="px-2 bg-success-subtle" scope="col">Teléfono</th>
+        <th class="px-2 bg-success-subtle" scope="col">Identificación</th>
+        <th class="px-2 bg-success-subtle" scope="col">Tipo</th>
+        <th class="px-2 bg-success-subtle" scope="col">Departamento</th>
+        <th class="px-2 bg-success-subtle" scope="col">Foto</th>
+        <th class="px-2 bg-success-subtle" scope="col">Dirección</th>
+        <th class="px-2 bg-success-subtle" scope="col">Ciudad</th>
+        <th class="px-2 bg-success-subtle" scope="col">Terminos</th>
+        <th class="px-2 bg-success-subtle" scope="col">Estado</th>
+        <th class="px-2 bg-success-subtle" scope="col">Roles</th>
+        <th class="px-2 bg-success-subtle" scope="col">Registro</th>
+        <th class="px-2 bg-success-subtle" scope="col">Ultimo login</th>
+        <th class="px-2 bg-success-subtle" scope="col">Obs retiro</th>
+        <th class="px-2 bg-success-subtle" scope="col">Editar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of listUser">
+        <td>{{ user.names }}</td>
+        <td>{{ user.last_name }}</td>
+        <td>{{ user.mail }}</td>
+        <td>{{ user.phone }}</td>
+        <td>{{ user.identification_card }}</td>
+        <td>{{ user.tipo_identificacion }}</td>
+        <td>{{ user.names_department }}</td>
+        <td>
+          <img
+            *ngIf="user.photo"
+            [src]="user.photo"
+            alt="foto"
+            width="50"
+            height="50"
+          />
+        </td>
+        <td>{{ user.address }}</td>
+        <td>{{ user.name_city }}</td>
+        <td>{{ user.terminos_condicion === 1 ? "Si" : "No" }}</td>
+        <td>{{ user.estado }}</td>
+        <td>{{ user.roles }}</td>
+        <td>{{ user.date_register | date : "dd/MM/yyyy" }}</td>
+        <td>{{ user.last_login | date : "yyyy/MM/dd:HH:mm:ss" }}</td>
+        <td>{{ user.obsLowSuscripcion }}</td>
+
+        <!-- botones -->
+        <td class="px-1">
+          <div class="d-flex gap-1 justify-content-center">
+            <button
+              style="background-color: #86b7fe63"
+              type="button"
+              class="btn btn-accion btn-light p-1"
+            >
+              <span class="material-symbols-outlined"> edit </span>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- paginador -->
+<div class="d-flex" style="justify-content: space-between">
+  <!-- btn scroll right -->
+  <div>
+    <button class="btn-right" (click)="scrollRight('left')">
+      <span class="material-symbols-outlined"> arrow_back </span>
+    </button>
+    <button class="btn-right" (click)="scrollRight('right')">
+      <span class="material-symbols-outlined"> arrow_forward </span>
+    </button>
+  </div>
+  <div class="d-flex" style="justify-content: flex-end">
+    <button
+      type="button"
+      class="btn-pag btn btn-light mr-1"
+      (click)="prevPaginator()"
+    >
+      Anterior
+    </button>
+    <button
+      type="button"
+      class="btn-pag btn btn-light mr-1"
+      *ngFor="let item of grupPaginate; let i = index"
+      (click)="paginate(item, i)"
+      [ngClass]="{ 'active-page': i === activeIndex }"
+    >
+      {{ i + 1 }}
+    </button>
+
+    <button
+      type="button"
+      class="btn-pag btn btn-light mr-1"
+      (click)="nextPaginator()"
+    >
+      Siguiente
+    </button>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="d-flex gap-2" style="flex-wrap: wrap; justify-content: center">
+  <div
+    *ngFor="let option of purchaseList"
+    style="
+      display: grid;
+      grid-template-columns: 100px 3fr;
+      margin-bottom: 10px;
+      border: solid 0.5px #9e9e9e59;
+      border-radius: 8px;
+      gap: 5px;
+      padding: 5px;
+      width: 400px;
+    "
+  >
+    <!-- //imagen del producto -->
+    <img
+      class="align-self-center"
+      src="{{ option.fotos_producto }}"
+      alt="imagen producto"
+      width="100px"
+    />
+    <!-- datos de la compra -->
+    <div>
+      <p class="d-block">
+        <strong> Estado:</strong> {{ option.estado_entrega }}
+      </p>
+      <p class="d-block">
+        <strong> Producto:</strong> {{ option.product_name }}
+      </p>
+      <p class="d-block">
+        <strong> Fecha de entrega:</strong>
+        {{ option.date_confirmed_delivery | date : "dd/MM/yyyy" }}
+      </p>
+      <p class="d-block">
+        <strong> Dirección de entrega:</strong>{{ option.address_delivery }}
+      </p>
+      <p class="d-block">
+        <strong> Observaciones: </strong>{{ option.obs_venta }}
+      </p>
+      <div class="d-flex" style="justify-content: flex-end">
+        <app-modal-devolucion [data]="option"></app-modal-devolucion>
+      </div>
+    </div>
+  </div>
+</div>

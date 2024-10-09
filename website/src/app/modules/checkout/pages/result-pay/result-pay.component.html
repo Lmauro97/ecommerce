@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<div *ngIf="paymentStatus === 'rejected'" class="payment-failed">
+  <div class="content">
+    <img
+      class="payment-icon"
+      src="../assets/img/pay/failed.png"
+      alt="Payment Status Icon"
+    />
+    <h2>Pago Rechazado</h2>
+  </div>
+</div>
+<div *ngIf="paymentStatus === 'approved'" class="payment-approved">
+  <div class="content">
+    <img
+      class="payment-icon"
+      src="../assets/img/pay/approved.png"
+      alt="Payment Status Icon"
+    />
+    <h2>Pago Aprobado</h2>
+  </div>
+</div>
+<div *ngIf="paymentStatus === 'in_process'" class="payment-in_process">
+  <div class="content">
+    <img
+      class="payment-icon"
+      src="../assets/img/pay/procesando_pago.png"
+      alt="Payment Status Icon"
+    />
+    <h2>Pago En Proceso</h2>
+  </div>
+</div>
+<div *ngIf="paymentStatus === 'pending'" class="payment-pending">
+  <div class="content">
+    <img
+      class="payment-icon"
+      src="../assets/img/pay/pago_pendiente.png"
+      alt="Payment Status Icon"
+    />
+    <h2>Pago Pendiente</h2>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <p
+      style="font-size: 22px; color: #343a40; margin: 0"
+      [innerHTML]="mensaje"
+    ></p>
+  </div>
+  <button class="btn btn-success" routerLink="/home">Ver mas producto</button>
+</div>
+
+<app-footer></app-footer>

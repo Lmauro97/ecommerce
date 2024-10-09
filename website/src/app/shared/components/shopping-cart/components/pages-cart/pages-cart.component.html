@@ -1,0 +1,143 @@
+<div>
+  <!-- Button trigger modal -->
+
+  <button
+    type="button"
+    class="btn"
+    data-bs-toggle="modal"
+    data-bs-target="#staticBackdrop"
+  >
+    <span class="material-symbols-outlined shopping_cart"> shopping_cart </span>
+  </button>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="staticBackdrop"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">
+            Productos En Tu Carrito
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <!-- este es el body del carrito -->
+
+          <div
+            class="container-products"
+            *ngFor="let product of listaProductos"
+          >
+            <div class="list-product border rounded-1 m-1 p-2">
+              <img src="{{ product.main_photo }}" alt="imagen" width="100" />
+              <div class="w-100">
+                <h4>
+                  {{ product.product_name | titlecase }}
+                </h4>
+                <span class="colorText mx-2 d-block"
+                  >Stock Disponible: {{ product.stock }}</span
+                >
+
+                <span class="text-success"
+                  >Precio: ${{ product.precioTotal }}</span
+                >
+
+                <div class="d-flex align-items-center m-auto m-y-1 cantidades">
+                  <span class="colorText mx-2"><b>Cantidad:</b></span>
+
+                  <!-- <select
+                    #cant
+                    class="form-select"
+                    aria-label="Default select example"
+                    style="border: none"
+                    (change)="
+                      updateCantidadProduct(product.id_product, cant.value)
+                    "
+                  >
+                    <option
+                      *ngFor="let cant of listCantidad"
+                      value="{{ cant.cantidad }}"
+                      [selected]="cant.cantidad === product.amount"
+                    >
+                      {{ cant.cantidad }}
+                      <span *ngIf="cant.cantidad === 1">unidad</span>
+                      <span *ngIf="cant.cantidad > 1">unidades</span>
+                    </option>
+                  </select> -->
+
+                  <select
+                    #cant
+                    class="form-select"
+                    style="border: none"
+                    (change)="
+                      updateCantidadProduct(product.id_product, cant.value)
+                    "
+                  >
+                    <option
+                      *ngFor="let qty of getStockArray(product.stock)"
+                      [value]="qty"
+                      [selected]="qty === product.amount"
+                    >
+                      <span class="m-5 p-3">
+                        {{ qty }} - {{ qty > 1 ? "unidades" : "unidad" }}
+                      </span>
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="btn-close"
+                (click)="elininarProduct(product.id_product)"
+              ></button>
+            </div>
+          </div>
+          <div *ngIf="listaProductos.length == 0">
+            <h4>No tienes productos en el carrito</h4>
+            <a class="btn border mt-1" href="/home">
+              <span>Ver Productos</span>
+            </a>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div
+            class="alert alert-info d-flex justify-content-center m-0 p-1 mt-1 w-100"
+            role="alert"
+            style="max-height: 50px"
+            *ngIf="msmAddProduct !== ''"
+          >
+            {{ msmAddProduct }}
+          </div>
+          <button
+            #checkoutLink
+            type="button"
+            class="btn-main btn-cerrar"
+            data-bs-dismiss="modal"
+          >
+            Cerrar
+          </button>
+
+          <button
+            class="btn-pagar2"
+            (click)="closeAndNavigate()"
+            routerLink="/checkout"
+          >
+            Ir A Pagar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

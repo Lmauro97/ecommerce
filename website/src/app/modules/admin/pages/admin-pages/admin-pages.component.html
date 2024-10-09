@@ -1,0 +1,21 @@
+<div id="admin-pages">
+  <div id="admin-pages-sidebar">
+    <!-- logo -->
+    <div class="d-flex justify-content-center">
+      <a class="navbar-brand" routerLink="/home">
+        <img
+          class="logo"
+          src="./assets/img/logos pagina/imagen(2).png"
+          alt="Ventas libres"
+          width="150"
+        />
+      </a>
+    </div>
+    <hr class="mb-5" />
+    <!-- sidebar -->
+    <app-sidebar-menu />
+  </div>
+  <div id="container-main">
+    <router-outlet></router-outlet>
+  </div>
+</div>

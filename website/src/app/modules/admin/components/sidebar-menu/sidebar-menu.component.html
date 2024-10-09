@@ -1,0 +1,32 @@
+<!-- sidebar -->
+<div class="sidebar">
+  <div class="m-3 d-flex gap-1">
+    <span class="material-symbols-outlined"> inventory </span>
+    <a routerLink="/admin/order-list" routerLinkActive="active">
+      Listado de ordenes
+      <span
+        class="badge text-bg-secondary"
+        [ngClass]="{ 'text-red': totalOrderNew > 1 }"
+      >
+        {{ totalOrderNew }}
+      </span>
+    </a>
+  </div>
+  <div class="m-3 d-flex gap-1">
+    <span class="material-symbols-outlined"> bar_chart_4_bars </span>
+    <a routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
+  </div>
+  <div class="m-3 d-flex gap-1">
+    <span class="material-symbols-outlined"> inventory_2 </span>
+    <a routerLink="/productos/lista" routerLinkActive="active">Stock</a>
+  </div>
+
+  <div class="m-3 d-flex gap-1">
+    <span class="material-symbols-outlined"> group </span>
+    <a routerLink="/admin/user-list" routerLinkActive="active">Usuarios</a>
+  </div>
+  <div class="m-3 d-flex gap-1">
+    <span class="material-symbols-outlined"> checklist </span>
+    <a routerLink="/admin/pqrs-list" routerLinkActive="active">PQRS</a>
+  </div>
+</div>

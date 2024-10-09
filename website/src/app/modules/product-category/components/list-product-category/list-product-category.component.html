@@ -1,0 +1,102 @@
+<div
+  class="d-flex"
+  style="justify-content: center; flex-direction: column; min-height: 300px"
+  *ngIf="alertProductosEmpty !== ''"
+>
+  <h2 class="text-center mt-5">
+    {{ alertProductosEmpty }}
+  </h2>
+  <button
+    routerLink="/home"
+    class="btn btn-primary m-auto mt-3"
+    style="max-width: 200px"
+  >
+    Todos Los Productos
+  </button>
+</div>
+
+<div class="m-auto main-all-product p-3" *ngIf="alertProductosEmpty === ''">
+  <div
+    class="card m-1 shadow p-3 mb-5 bg-body-tertiary rounded"
+    style="width: 18rem"
+    *ngFor="let product of productCategoriaFin"
+  >
+    <div class="main-img">
+      <img
+        src="{{ product.main_photo }}"
+        class="card-img-top"
+        alt="foto de {{ product.product_name }}"
+        routerLink="/detalle/{{
+          product.product_name.replaceAll(' ', '-') + '-' + product.id
+        }}"
+      />
+      <div class="stock">
+        <span>Stock: {{ product.stock }}</span>
+      </div>
+    </div>
+    <div class="card-body p-0 d-flex justify-content-center">
+      <!-- <div class="card-body p-0" style="max-height: 160px; min-height: 160px"> -->
+
+      <h5
+        class="card-title text-center m-auto mt-3"
+        *ngIf="product.product_name.length > 29"
+      >
+        {{ product.product_name.slice(0, 30) + "..." | uppercase }}
+      </h5>
+      <h5
+        class="card-title text-center m-auto mt-3"
+        *ngIf="product.product_name.length <= 29"
+      >
+        {{ product.product_name | uppercase }}
+      </h5>
+      <!-- <p
+          class="card-text"
+          style="overflow: hidden; max-height: 100px; min-height: 100px"
+        >
+          {{ product.feature.replaceAll("***", " ") | slice : 0 : 100 }}...
+        </p> -->
+    </div>
+    <div class="text-center my-2 d-flex gap-2 justify-content-center">
+      <span class="my-2" style="font-size: 18px"
+        ><b>Precio</b>:
+        <b
+          [ngStyle]="{
+            'text-decoration':
+              product?.promotion_price !== null  &&
+                product?.on_promocion === 1 ? 'line-through' : '',
+            color: product?.promotion_price !== null &&
+                product?.on_promocion === 1  ? '#6c757d' : '',
+          }"
+          >{{ product.sale_price }}</b
+        ></span
+      >
+      <span
+        class="my-2"
+        style="font-size: 18px"
+        *ngIf="product.promotion_price !== null && product?.on_promocion === 1"
+        ><b>${{ product.promotion_price | formatNumber }}</b></span
+      >
+    </div>
+    <div class="d-flex gap-2 justify-content-center mt-0">
+      <a class="btn btn-primary" (click)="addProductoCar(product.id)">
+        <span
+          class="material-symbols-outlined shopping_cart p-0 m-0"
+          style="color: #f1f1f1"
+        >
+          shopping_cart </span
+        >Adicionar</a
+      >
+      <button class="btn btn-success" (click)="verifificarCar(product.id)">
+        Ir A Pagar
+      </button>
+    </div>
+    <div
+      class="alert alert-info d-flex justify-content-center m-0 p-0 mt-1"
+      role="alert"
+      style="max-height: 50px"
+      *ngIf="msmAddProduct !== '' && product.id == idProducto"
+    >
+      {{ msmAddProduct }}
+    </div>
+  </div>
+</div>

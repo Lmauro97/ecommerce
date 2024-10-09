@@ -1,0 +1,282 @@
+<!--seccion de los mas vendido-->
+<h4 class="title-best text-center">Productos Mas Vendidos</h4>
+
+<div
+  id="carouselExampleInterval_best"
+  class="carousel slide"
+  data-bs-ride="carousel"
+  style="margin-bottom: 76px"
+>
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="10000">
+      <section class="my-4 main-bets_sale">
+        <div class="best-sale" *ngFor="let product of productTop">
+          <img
+            class="item-best_sale_uno"
+            [src]="product.main_photo"
+            alt="Foto de{{ product.product_name }}"
+            width="50px"
+            routerLink="/detalle/{{
+              product.product_name.replaceAll(' ', '-') +
+                '-' +
+                product.id_product
+            }}"
+            style="cursor: pointer"
+          />
+          <div class="item-best_sale_dos">
+            <h6 class="title-card text-center m-auto" style="max-width: 70%">
+              {{ product.product_name.slice(0, 30) }}...
+            </h6>
+            <div>
+              <button
+                class="btn-shop"
+                routerLink="/detalle/{{
+                  product.product_name.replaceAll(' ', '-') +
+                    '-' +
+                    product.id_product
+                }}"
+              >
+                Ver
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="8"
+                  height="12"
+                  viewBox="0 0 8 12"
+                  fill="none"
+                >
+                  <path
+                    d="M1.32178 1L6.32178 6L1.32178 11"
+                    stroke="#D87D4A"
+                    stroke-width="2"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      <section class="my-4 main-bets_sale">
+        <div class="best-sale" *ngFor="let product of productTop2">
+          <img
+            class="item-best_sale_uno"
+            [src]="product.main_photo"
+            alt="Foto de{{ product.product_name }}"
+            width="50px"
+            routerLink="/detalle/{{
+              product.product_name.replaceAll(' ', '-') +
+                '-' +
+                product.id_product
+            }}"
+            style="cursor: pointer"
+          />
+          <div class="item-best_sale_dos">
+            <h6 class="title-card text-center m-auto" style="max-width: 70%">
+              {{ product.product_name.slice(0, 30) }}...
+            </h6>
+            <div>
+              <button
+                class="btn-shop"
+                routerLink="/detalle/{{
+                  product.product_name.replaceAll(' ', '-') +
+                    '-' +
+                    product.id_product
+                }}"
+              >
+                Ver
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="8"
+                  height="12"
+                  viewBox="0 0 8 12"
+                  fill="none"
+                >
+                  <path
+                    d="M1.32178 1L6.32178 6L1.32178 11"
+                    stroke="#D87D4A"
+                    stroke-width="2"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="carousel-item">
+      <section class="my-4 main-bets_sale">
+        <div class="best-sale" *ngFor="let product of productTop3">
+          <img
+            class="item-best_sale_uno"
+            [src]="product.main_photo"
+            alt="Foto de{{ product.product_name }}"
+            width="50px"
+            routerLink="/detalle/{{
+              product.product_name.replaceAll(' ', '-') +
+                '-' +
+                product.id_product
+            }}"
+            style="cursor: pointer"
+          />
+          <div class="item-best_sale_dos">
+            <h6 class="title-card text-center m-auto" style="max-width: 70%">
+              {{ product.product_name.slice(0, 30) }}...
+            </h6>
+            <div>
+              <button
+                class="btn-shop"
+                routerLink="/detalle/{{
+                  product.product_name.replaceAll(' ', '-') +
+                    '-' +
+                    product.id_product
+                }}"
+              >
+                Ver
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="8"
+                  height="12"
+                  viewBox="0 0 8 12"
+                  fill="none"
+                >
+                  <path
+                    d="M1.32178 1L6.32178 6L1.32178 11"
+                    stroke="#D87D4A"
+                    stroke-width="2"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#carouselExampleInterval_best"
+    data-bs-slide="prev"
+    style="display: flex; justify-content: flex-start; padding: 27px"
+  >
+    <span
+      class="carousel-control-prev-icon"
+      aria-hidden="true"
+      style="
+        background-color: rgb(85, 85, 85);
+        padding: 10px;
+        border-radius: 50%;
+      "
+    ></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#carouselExampleInterval_best"
+    data-bs-slide="next"
+    style="display: flex; justify-content: flex-end; padding: 27px"
+  >
+    <span
+      class="carousel-control-next-icon"
+      aria-hidden="true"
+      style="
+        background-color: rgb(85, 85, 85);
+        padding: 10px;
+        border-radius: 50%;
+      "
+    ></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<div id="carouselExampleMovil" class="carousel slide mb-5">
+  <div class="carousel-inner">
+    <div
+      class="carousel-item"
+      [ngClass]="{ active: i === 0 }"
+      *ngFor="let product of productTop; let i = index"
+    >
+      <div class="m-auto" style="width: 90%">
+        <img
+          [src]="product.main_photo"
+          alt="Foto de{{ product.product_name }}"
+          width="50px"
+          routerLink="/detalle/{{
+            product.product_name.replaceAll(' ', '-') + '-' + product.id_product
+          }}"
+          style="cursor: pointer; width: 150px; margin: auto"
+          class="d-block"
+        />
+        <div
+          class="w-100 d-flex justify-content-center"
+          style="flex-direction: column; align-items: center"
+        >
+          <h6 class="title-card text-center m-auto" style="max-width: 70%">
+            {{ product.product_name.slice(0, 30) }}...
+          </h6>
+          <button
+            class="btn-shop"
+            routerLink="/detalle/{{
+              product.product_name.replaceAll(' ', '-') +
+                '-' +
+                product.id_product
+            }}"
+          >
+            Ver
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="8"
+              height="12"
+              viewBox="0 0 8 12"
+              fill="none"
+            >
+              <path
+                d="M1.32178 1L6.32178 6L1.32178 11"
+                stroke="#D87D4A"
+                stroke-width="2"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#carouselExampleMovil"
+    data-bs-slide="prev"
+    style="display: flex; justify-content: flex-start; padding: 27px"
+  >
+    <span
+      class="carousel-control-prev-icon"
+      style="
+        background-color: rgb(85, 85, 85);
+        padding: 16px;
+        border-radius: 50%;
+      "
+      aria-hidden="true"
+    ></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#carouselExampleMovil"
+    data-bs-slide="next"
+    style="display: flex; justify-content: flex-end; padding: 27px"
+  >
+    <span
+      class="carousel-control-next-icon"
+      aria-hidden="true"
+      style="
+        background-color: rgb(85, 85, 85);
+        padding: 16px;
+        border-radius: 50%;
+      "
+    ></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>

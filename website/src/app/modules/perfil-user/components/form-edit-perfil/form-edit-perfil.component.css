@@ -1,0 +1,13 @@
+.btn-guardar {
+  border: none;
+  height: 40px;
+  background: #4caf50ba;
+  color: #ffffff;
+  width: 119px;
+}
+
+.btn-cerrar {
+  width: 119px;
+  border: none;
+  height: 40px;
+}

@@ -1,0 +1,123 @@
+.payment-failed {
+  background: rgb(180, 58, 130);
+  background: linear-gradient(
+    90deg,
+    rgba(180, 58, 130, 0.8996848739495799) 0%,
+    rgba(253, 115, 29, 0.8968837535014006) 50%,
+    rgba(180, 58, 130, 0.9) 100%
+  );
+  /* height: 50vh; */
+  padding: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+  justify-content: center;
+  align-items: center;
+}
+.payment-approved {
+  background: rgb(3, 141, 137);
+  background: linear-gradient(
+    90deg,
+    rgba(3, 141, 137, 1) 0%,
+    rgba(29, 253, 36, 0.6223739495798319) 50%,
+    rgba(3, 141, 137, 0.8) 100%
+  );
+  /* height: 50vh; */
+  padding: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+  justify-content: center;
+  align-items: center;
+}
+.payment-in_process {
+  background: rgb(10, 5, 67);
+  background: linear-gradient(
+    90deg,
+    rgba(10, 5, 67, 0.9) 0%,
+    rgba(92, 29, 253, 0.6223739495798319) 50%,
+    rgba(10, 5, 67, 1) 100%
+  );
+  /* height: 50vh; */
+  padding: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+  justify-content: center;
+  align-items: center;
+}
+.payment-pending {
+  background: rgb(142, 85, 4);
+  background: linear-gradient(
+    90deg,
+    rgba(142, 85, 4, 0.9669117647058824) 0%,
+    rgba(253, 175, 29, 0.46551120448179273) 50%,
+    rgba(142, 85, 4, 0.9697128851540616) 100%
+  );
+  /* height: 50vh; */
+  padding: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+  justify-content: center;
+  align-items: center;
+}
+h2 {
+  font-size: 40px;
+}
+.content {
+  text-align: center;
+}
+.payment-icon {
+  margin-top: 10px;
+  height: 35vh;
+}
+.card {
+  max-width: 92%;
+  width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+  /* background-color: aquamarine; */
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-body p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+  padding: 2em;
+}
+
+.card-body p {
+  white-space: pre-line;
+}
+
+.btn-success {
+  display: block;
+  width: 250px;
+  margin: 20px auto;
+}
+
+@media (max-width: 600px) {
+  .card {
+    max-width: 90%;
+    margin: auto;
+  }
+}

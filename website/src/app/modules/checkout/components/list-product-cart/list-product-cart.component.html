@@ -1,0 +1,108 @@
+<div class="list-product_cart p-3 mt-3">
+  <h3 class="text-center">Productos En El Carrito</h3>
+  <div class="container-products">
+    <div class="container-products" *ngFor="let product of listaProductos">
+      <div class="list-product border rounded-1 m-1 p-2">
+        <div style="position: relative">
+          <img src="{{ product.main_photo }}" alt="imagen" width="100" />
+          <img
+            *ngIf="product.stock === 0"
+            src="../assets/img/agotado-chincheta.png"
+            alt=""
+            width="100"
+            style="position: absolute; top: 0; left: 0"
+          />
+        </div>
+        <div class="w-100">
+          <h4>{{ product.product_name | titlecase }}</h4>
+          <span
+            class="colorText d-block"
+            [ngStyle]="{
+              color: product.stock === 0 ? 'red' : ''
+            }"
+            >Stock Disponible: {{ product.stock }}</span
+          >
+
+          <span class="text-success" style="display: block"
+            >Precio: ${{ product.precioTotal | formatNumber }}</span
+          >
+          <span class="text-success"
+            >Precio envió del producto:
+            <span
+              class="text-success"
+              *ngIf="product.tarifaEnvio !== 'Selecciona una ciudad'"
+              >${{ product.tarifaEnvio | formatNumber }}</span
+            >
+
+            <span
+              class="text-danger"
+              *ngIf="product.tarifaEnvio === 'Selecciona una ciudad'"
+              >{{ product.tarifaEnvio | formatNumber }}</span
+            >
+          </span>
+          <div class="d-flex align-items-center m-auto m-y-1 cantidades">
+            <span class="colorText mx-2 p-0"><b>Cantidad:</b></span>
+            <!-- <select
+              #cant
+              class="form-select select-cantidad px-1"
+              style="border: none"
+              (change)="updateCantidadProduct(product.id_product, cant.value)"
+            >
+              <option
+                *ngFor="let cant of listCantidad"
+                value="{{ cant.cantidad }}"
+                [selected]="cant.cantidad === product.amount"
+              >
+                <span class="m-5"> {{ cant.cantidad }}</span> -
+                <span class="px-1" *ngIf="cant.cantidad < 2">unidad</span>
+                <span class="px-1" *ngIf="cant.cantidad > 1">unidades</span>
+              </option>
+            </select> -->
+
+            <select
+              #cant
+              class="form-select"
+              style="border: none"
+              (change)="updateCantidadProduct(product.id_product, cant.value)"
+            >
+              <option
+                *ngFor="let qty of getStockArray(product.stock)"
+                [value]="qty"
+                [selected]="qty === product.amount"
+              >
+                <span class="m-5 p-3">
+                  {{ qty }} - {{ qty > 1 ? "unidades" : "unidad" }}
+                </span>
+              </option>
+            </select>
+          </div>
+          <p
+            *ngIf="product.id_product === idProducto"
+            [ngStyle]="{
+              color:
+                msmAddProduct === 'Producto Actualizado Correctamente'
+                  ? '#0dcaf0'
+                  : 'red'
+            }"
+          >
+            {{ msmAddProduct }}
+          </p>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="elininarProduct(product.id_product)"
+        ></button>
+      </div>
+    </div>
+
+    <div class="detail-buys m-1 p-2 mb-2">
+      <span><b>SUB TOTAL DE LA COMPRA: </b>${{ subTotal | formatNumber }}</span>
+      <span
+        ><b>VALOR TOTAL DE ENVIO: </b>${{ totalEnvio || 0 | formatNumber }}
+      </span>
+      <span><b>IVA: </b>$0</span>
+      <span><b>TOTAL DE LA COMPRA: </b>${{ precioTotal | formatNumber }}</span>
+    </div>
+  </div>
+</div>

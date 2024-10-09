@@ -1,0 +1,62 @@
+<div class="main-search">
+  <div style="height: 20px; margin-bottom: 25px">
+    <h1 class="text-center mt-2">Listado de productos</h1>
+  </div>
+  <div
+    class="container"
+    style="width: 500px; display: flex; justify-content: center"
+  >
+    <input
+      #inputBuscar
+      class="form-control mx-1"
+      type="text"
+      placeholder="Buscar Producto Por Palabra Clave"
+      (input)="BuscarProducto($event)"
+    />
+    <button class="btn input-clear" (click)="limpiar()">Limpiar</button>
+  </div>
+</div>
+
+<div
+  class="container-product_list p-3"
+  style="overflow-y: scroll; height: 500px"
+>
+  <div
+    class="card m-1 shadow p-3 mb-5 bg-body-tertiary rounded"
+    style="width: 18rem"
+    *ngFor="let product of filterListProductos"
+  >
+    <div class="main-img m-auto">
+      <img
+        routerLink="/productos/editar/{{ product.id }}"
+        style="cursor: pointer"
+        src="{{ product.main_photo }}"
+        class="card-img-top"
+        alt="foto de {{ product.product_name }}"
+      />
+    </div>
+    <div class="card-body p-0">
+      <p class="card-title text-center" style="margin: 15px">
+        {{ product.product_name | uppercase }}
+      </p>
+      <div class="stock">
+        <p><b>Codigo</b>: {{ product.code | uppercase }}</p>
+        <p><b>Stock</b>: {{ product.stock }}</p>
+        <p>
+          <b>Percio De Compra</b>: ${{ product.purchase_price | formatNumber }}
+        </p>
+        <p><b>Percio De Venta</b>: ${{ product.sale_price | formatNumber }}</p>
+        <p>
+          <b>Percio De Promocion</b>:
+          {{ product.promotion_price ? product.promotion_price : "N/A" }}
+        </p>
+        <p><b>Estado</b>: {{ product.names_state }}</p>
+      </div>
+    </div>
+    <div class="d-flex gap-2 justify-content-center mt-3">
+      <a routerLink="/productos/editar/{{ product.id }}" class="btn btn-success"
+        >Editar</a
+      >
+    </div>
+  </div>
+</div>

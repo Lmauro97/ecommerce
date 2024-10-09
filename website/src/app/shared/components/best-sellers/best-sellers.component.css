@@ -1,0 +1,107 @@
+.title-best {
+  color: #f4ca69;
+  margin: 37px;
+  font-family: Manrope;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  -webkit-text-stroke: 1px rgb(118, 116, 116); /* Añade un borde al texto */
+}
+
+.title-best span {
+  color: #ffffff;
+}
+
+/* estilos para mobil */
+
+.main-bets_sale {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
+}
+.best-sale {
+  background: #ffffff;
+  width: 327px;
+  height: 255px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2px;
+  border: none;
+}
+.item-best_sale_uno {
+  width: 150px;
+  z-index: 999999;
+  border: solid 1px #dee2e6;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+.item-best_sale_uno:hover {
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  transform: rotate(
+    10deg
+  ); /* Puedes ajustar el ángulo de rotación según tus preferencias */
+  transition: transform 0.3s ease; /* Agrega una transición suave para una animación más agradable */
+}
+
+.item-best_sale_dos {
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-card {
+  align-self: end;
+  margin: 0;
+  padding: 0;
+}
+.btn-shop {
+  border: solid 1px #131516;
+  border-radius: 8px;
+  background: #f1f1f1;
+  color: #000000;
+  font-family: Manrope;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  width: 150px !important;
+  height: 35px !important;
+  margin-top: 15px;
+}
+.btn-shop:hover {
+  background-color: #1191bf;
+  color: #ffffff;
+}
+/* estilos para mobil */
+@media (min-width: 0px) and (max-width: 736px) {
+  #carouselExampleInterval_best {
+    display: none !important;
+  }
+}
+
+/* estilos de table */
+@media (min-width: 738px) and (max-width: 1024px) {
+  #carouselExampleInterval_best {
+    display: none !important;
+  }
+}
+
+/* estilos de desktop */
+@media (min-width: 737px) {
+  #carouselExampleMovil {
+    display: none !important;
+  }
+}
+/* estilos de desktop */

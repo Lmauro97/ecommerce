@@ -1,0 +1,257 @@
+<div class="row principal m-auto">
+  <!-- z-index evita que otra imagen se le superponga -->
+  <div class="seccionOne">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/home">
+          <img
+            class="logo"
+            src="./assets/img/logos pagina/imagen(2).png"
+            alt="Ventas libres"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+  </div>
+  <div class="seccionTwe">
+    <div class="input-group">
+      <div
+        style="
+          width: 80%;
+          display: grid;
+          grid-template-columns: 1fr;
+          height: 42px;
+          align-self: end;
+        "
+      >
+        <input
+          value=""
+          #searchProduct
+          list="listProductosNav"
+          class="form-control"
+          placeholder="Filtrar productos por etiquetas"
+          aria-label="Search"
+          style="grid-area: 1/1/2/2; border-radius: 0px"
+          (keypress)="presEnter($event)"
+          (input)="filterLabel()"
+        />
+
+        <datalist id="listProductosNav">
+          <option
+            *ngFor="let label of listLabel"
+            value="{{ label.nombre | titlecase }}"
+          ></option>
+        </datalist>
+        <button
+          style="grid-area: 1/1/2/2; justify-self: end; align-self: center"
+          class="btn"
+          *ngIf="searchProduct.value"
+          (click)="
+            searchProduct.value = '';
+            buscarProducto(searchProduct.value);
+            clearInputLabel()
+          "
+        >
+          <img src="../assets/img/limpiar.png" alt="icono limpiar" width="22" />
+        </button>
+      </div>
+      <button
+        style="height: 42px; align-self: end"
+        class="btn btn-outline-success d-flex"
+        type="submit"
+        (click)="buscarProducto(searchProduct.value)"
+      >
+        <span class="material-symbols-outlined m-auto" style="width: 25px">
+          search
+        </span>
+      </button>
+    </div>
+  </div>
+  <div class="seccionThree" style="gap: 10px">
+    <!-- Contenido de la tercera columna -->
+    <a class="nav-link" aria-disabled="true" *ngIf="!activateOptionIngresar">
+      <app-register-user></app-register-user>
+    </a>
+    <app-remember-password></app-remember-password>
+
+    <div class="dropdown" *ngIf="activateOptionIngresar">
+      <button
+        class="btn btn-secondary dropdown-toggle d-flex align-items-center gap-2"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+        style="padding: 3px; background-color: black; border: none"
+      >
+        <span
+          style="
+            border-radius: 50%;
+            border: solid 0.5px #dace30;
+            width: 35px;
+            height: 35px;
+            background-image: url('{{ fotoPerfil }}');
+            background-size: cover;
+            background-position: center;
+            
+          "
+          class="material-symbols-outlined"
+        >
+        </span>
+
+        <span> Tu Cuenta</span>
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <a class="dropdown-item" routerLink="/cuenta-usuario">Mi Perfil</a>
+        </li>
+        <li class="m-0">
+          <hr class="dropdown-divider" />
+        </li>
+        <li class="p-0">
+          <a
+            class="dropdown-item d-flex gap-2 btn-clouse"
+            (click)="closeSesion()"
+            >Salir
+            <span class="material-symbols-outlined"> power_settings_new </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <a class="nav-link" aria-disabled="true" *ngIf="!activateOptionIngresar">
+      <app-login-component></app-login-component>
+    </a>
+
+    <div class="dropdown" *ngIf="activateOptionAdmin">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        Administración
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <button
+            class="dropdown-item"
+            type="button"
+            routerLink="/productos/lista"
+          >
+            Lista De Productos
+          </button>
+        </li>
+        <li>
+          <button
+            class="dropdown-item"
+            type="button"
+            routerLink="/admin/order-list"
+          >
+            Administración
+          </button>
+        </li>
+
+        <li>
+          <button
+            class="dropdown-item"
+            type="button"
+            routerLink="/productos/nuevo"
+          >
+            Crear Producto
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="d-flex">
+      <button class="btn p-0 mt-1" style="color: yellowgreen">
+        <app-pages-cart></app-pages-cart>
+      </button>
+      <span
+        style="
+          color: red;
+          margin-left: -17px;
+          font-size: 10px;
+          padding-top: 4px;
+        "
+        >{{ totalProductos }}</span
+      >
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg seccionFour">
+    <div class="container-fluid">
+      <div
+        class="collapse navbar-collapse justify-content-center"
+        id="navbarSupportedContent"
+      >
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link option-nav dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Categorias
+            </a>
+            <ul
+              class="dropdown-menu"
+              style="max-height: 500px; overflow-y: auto"
+            >
+              <input
+                class="form-control m-auto"
+                style="width: 90%"
+                type="text"
+                placeholder="Buscar Categoria"
+                (input)="BuscarCategoria($event)"
+              />
+              <li *ngFor="let categoria of filterListCategoria">
+                <a
+                  class="dropdown-item"
+                  routerLink="/categoria/{{
+                    categoria.category_name.replaceAll(' ', '-')
+                  }}"
+                  >{{ categoria.category_name | titlecase }}</a
+                >
+              </li>
+
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li><a class="dropdown-item" href="#">Promociones</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link option-nav"
+              aria-disabled="true"
+              routerLink="/ofertas"
+              >Ofertas</a
+            >
+          </li>
+          <li class="nav-item" *ngIf="activateOptionIngresar">
+            <a class="nav-link option-nav" aria-disabled="true"
+              ><app-pqrs></app-pqrs>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link option-nav" aria-disabled="true">
+              <app-modal-porque-comprar-aqui></app-modal-porque-comprar-aqui>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>

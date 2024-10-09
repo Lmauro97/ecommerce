@@ -1,0 +1,67 @@
+.main-search {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  column-gap: 10px;
+}
+
+input {
+  height: 35px;
+  padding: 3px;
+}
+.btn-crear_user {
+  background: linear-gradient(
+    128.49deg,
+    rgb(60, 177, 255) 19.86%,
+    rgb(12, 252, 220) 68.34%
+  );
+  height: 35px;
+  padding: 3px;
+  p {
+    color: rgb(255, 255, 255);
+    font-size: 17px;
+    font-family: cursive;
+  }
+  color: rgb(255, 255, 255);
+  font-size: 17px;
+  font-family: cursive;
+}
+
+tr td:first-child {
+  width: 100px !important;
+}
+
+th {
+  font-size: 16px;
+  border-left: 1px solid #ccc;
+  text-align: center;
+  padding: 0;
+}
+
+td {
+  font-size: 14px;
+  border-left: 1px solid #ccc;
+}
+.active-page {
+  background: linear-gradient(
+    128.49deg,
+    rgb(203, 60, 255) 19.86%,
+    rgb(127, 37, 251) 68.34%
+  );
+  color: white;
+}
+.btn-pag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  padding: 3px;
+  border-radius: 0px !important;
+  border-left: 1px solid #ccc;
+}
+.btn-right {
+  background-color: #f0f8ff26;
+  border: none;
+  height: 25px;
+  color: rgba(203, 60, 255, 0.801);
+}

@@ -1,0 +1,142 @@
+<h1 style="text-align: right">Listado de ordenes</h1>
+<hr />
+
+<h3>Estado de los pedidos</h3>
+<!-- buscador -->
+<div class="main-search">
+  <div class="d-flex">
+    <input
+      #searchInput
+      style="width: 300px; border-radius: 8px 0px 0px 8px"
+      class="form-control px-2"
+      type="text"
+      placeholder="Buscar orden"
+      (input)="searchOrder(searchInput.value)"
+    />
+    <button
+      (click)="clearSearch()"
+      class="btn btn-light"
+      style="border-radius: 0px 8px 8px 0px; height: 35px"
+    >
+      <img src="../assets/img/limpiar.png" alt="icono limpiar" width="22" />
+    </button>
+  </div>
+  <div>
+    <input
+      #searchDateInput
+      class="form-control"
+      type="date"
+      (input)="searchDate(searchDateInput.value)"
+    />
+  </div>
+  <app-new-orden />
+</div>
+
+<table class="table m-0 mt-1">
+  <thead>
+    <tr>
+      <th scope="col">N° Factura</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Pago</th>
+      <th scope="col">Entrega</th>
+      <th scope="col">Nombre-Apellidos</th>
+      <th scope="col">Documento</th>
+      <th scope="col">Telefono</th>
+      <th scope="col">Correo</th>
+      <th scope="col">Ciudad</th>
+      <th scope="col">Dirección</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let orden of listOrders">
+      <td>{{ orden.number_bill.toString().padStart(10, "0") }}</td>
+      <td>{{ orden.date_register | date : "dd/MM/yyyy" }}</td>
+      <td [style.background]="listStatusPayment[orden.pago]">
+        {{
+          orden.pago === "approved"
+            ? "Aprobado"
+            : orden.pago === "pending"
+            ? "Pendiente"
+            : orden.pago === "contraentrega"
+            ? "Contra entrega"
+            : "Rechazado"
+        }}
+      </td>
+      <td [style.background]="listStatusDelivery[orden.delivery]">
+        {{ orden.delivery | titlecase }}
+      </td>
+      <td>{{ orden.nombre }}</td>
+      <td>{{ orden.card_buyer }}</td>
+      <td>{{ orden.phone_buyer }}</td>
+      <td>{{ orden.mail_buyer }}</td>
+      <td>{{ orden.city }}</td>
+      <td>{{ orden.address_delivery }}</td>
+      <!-- botones -->
+      <td class="px-1">
+        <div class="d-flex gap-1">
+          <button
+            style="background-color: #86b7fe63"
+            type="button"
+            class="btn btn-accion btn-light p-1"
+          >
+            <span
+              class="material-symbols-outlined"
+              (click)="openModalEdit(orden)"
+            >
+              edit
+            </span>
+          </button>
+          <button
+            style="background-color: #a9f89e9d"
+            type="button"
+            class="btn btn-accion btn-light o-1"
+            (click)="entregarOrder(orden.id)"
+            [disabled]="orden.delivery == 'Pedido entregado'"
+            [ngClass]="{ disabled: orden.delivery == 'Pedido entregado' }"
+          >
+            <span class="material-symbols-outlined"> local_shipping </span>
+          </button>
+          <!-- ver otros datos -->
+
+          <button
+            type="button"
+            class="btn btn-accion btn-light"
+            (click)="openModal(orden)"
+          >
+            <span class="material-symbols-outlined"> visibility </span>
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- paginador -->
+<div class="d-flex" style="justify-content: flex-end">
+  <button
+    type="button"
+    class="btn-pag btn btn-light mr-1"
+    (click)="prevPaginator()"
+  >
+    Anterior
+  </button>
+  <button
+    type="button"
+    class="btn-pag btn btn-light mr-1"
+    *ngFor="let item of grupPaginate; let i = index"
+    (click)="paginate(item, i)"
+    [ngClass]="{ 'active-page': i === activeIndex }"
+  >
+    {{ i + 1 }}
+  </button>
+
+  <button
+    type="button"
+    class="btn-pag btn btn-light mr-1"
+    (click)="nextPaginator()"
+  >
+    Siguiente
+  </button>
+</div>
+
+<app-modal-info />

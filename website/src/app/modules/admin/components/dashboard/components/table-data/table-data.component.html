@@ -1,0 +1,20 @@
+<table class="table m-0 border reunder">
+  <thead>
+    <tr>
+      <th
+        class="bg-success-subtle"
+        scope="col"
+        *ngFor="let thead of dataValue[0].labels"
+      >
+        {{ thead.value }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of dataValue[0].data">
+      <td *ngFor="let key of objectKeys(data)">
+        {{ data[key] }}
+      </td>
+    </tr>
+  </tbody>
+</table>

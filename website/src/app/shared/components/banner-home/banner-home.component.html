@@ -1,0 +1,22 @@
+<section class="main-banner" *ngIf="banner[0]">
+  <!--caja de texto -->
+  <div class="container">
+    <!--titulo de nuevo producto -->
+    <h4 class="title-new_product">NEW PRODUCT</h4>
+    <!--titulo principal de nuevo producto -->
+    <h1 class="title-main m-4">{{ banner[0].product_name }}</h1>
+    <div class="text-banner text-center m-3">
+      <p>{{ banner[0].description_banner }}</p>
+    </div>
+    <!--Boton ver mas productos -->
+    <button
+      class="btn-main m-auto border border-2 border-dark rounded-3 px-4 py-2"
+      style="background-color: #b36d0b"
+      routerLink="/detalle/{{
+        banner[0].product_name.replaceAll(' ', '-') + '-' + banner[0].id_product
+      }}"
+    >
+      Ver Producto
+    </button>
+  </div>
+</section>

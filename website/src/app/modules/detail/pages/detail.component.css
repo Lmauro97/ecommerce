@@ -1,0 +1,161 @@
+.imagen-central img {
+  transition: transform 0.25s ease;
+}
+.imagen-central img {
+  cursor: url("../../../../assets/img/zoom.png"), auto;
+}
+.image-container {
+  position: relative;
+}
+
+.highlight {
+  position: absolute;
+  width: 50%; /* 20% of the image width */
+  height: 40%; /* 20% of the image height */
+  background: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.zoom {
+  width: 30vw;
+  height: 65vh;
+  background-size: 152%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid;
+  border-radius: 11px;
+}
+
+/* .imagen-central img:hover {
+  transform: scale(1.2);
+} */
+
+.container {
+  display: flex;
+}
+
+#originalImg {
+  width: 200px; /* Ajusta esto según tus necesidades */
+}
+
+#zoomedImg {
+  width: 300px; /* Ajusta esto según tus necesidades */
+  visibility: hidden;
+}
+
+.card-principal {
+  margin: 2%;
+  width: 95vw;
+}
+.seccionFour {
+  width: auto;
+  max-width: 33% !important;
+}
+
+.principal {
+  display: flex;
+  background-color: #f5f5f5;
+  margin: auto;
+}
+.carousel-item img {
+  height: 100%;
+  margin: auto; /* This will center the image if it's smaller than the screen size */
+}
+#carouselExampleInterval {
+  margin: auto;
+  width: 429px;
+}
+.img-thumbnail {
+  border: 1px solid blue;
+  transition: transform 0.3s ease;
+  width: 46px;
+  height: 54px;
+}
+.img-thumbnail:hover {
+  transform: scale(1.1);
+}
+.img-thumbnail-active {
+  border-color: red !important;
+  transform: scale(1.2);
+}
+.btn {
+  width: -webkit-fill-available;
+}
+/* .col-2 h3,
+h2 {
+  text-align: left !important;
+} */
+
+.imagen-central {
+  width: auto;
+  /* position: sticky; */
+  top: 5vh;
+}
+.imagen-lateral {
+  width: 70px;
+  height: auto;
+  position: relative;
+  top: 5vh;
+}
+p {
+  text-align: left !important;
+}
+@media screen and (max-width: 1000px) {
+  .seccionFour {
+    width: auto;
+    max-width: 50% !important;
+    width: 50%;
+    margin-top: 20px;
+  }
+  .producData {
+    width: 50%;
+    top: 0;
+    position: sticky;
+    margin-top: 20px;
+  }
+
+  .imagen-central {
+    width: 80vw;
+    position: static;
+    top: 5vh;
+  }
+  .imagen-lateral {
+    width: 70px;
+    height: auto;
+    position: static;
+    top: 5vh;
+  }
+  /* Estilos específicos para pantallas de 577px de ancho o más (tabletas, laptops, desktops) */
+}
+@media screen and (max-width: 576px) {
+  /* Estilos específicos para pantallas de hasta 576px de ancho (teléfonos) */
+  .zoom {
+    width: 96vw;
+  }
+  .carousel-item img {
+    height: 100%;
+    width: 100%;
+  }
+  .imagen-central {
+    width: 70%;
+  }
+  #carouselExampleInterval {
+    margin: auto;
+    width: 50vw;
+  }
+  .seccionFour {
+    width: auto;
+    max-width: 100% !important;
+    width: 100%;
+    margin-top: 20px;
+  }
+  .producData {
+    width: 100%;
+    top: 0;
+    position: static;
+    margin-top: 20px;
+  }
+  .card-principal {
+    margin: 5%;
+  }
+}

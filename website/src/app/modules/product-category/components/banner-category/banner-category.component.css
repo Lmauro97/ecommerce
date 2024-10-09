@@ -1,0 +1,19 @@
+.main-baner_categoria {
+  background: #000;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-categoria {
+  color: #fff;
+  text-align: center;
+  font-family: Manrope;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 44px; /* 110% */
+  letter-spacing: 1.4 rem;
+  text-transform: uppercase;
+}

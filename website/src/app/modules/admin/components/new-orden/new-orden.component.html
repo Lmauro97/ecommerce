@@ -1,0 +1,454 @@
+<!-- Button trigger modal -->
+<div class="d-flex">
+  <button
+    #modalInfoEdit
+    type="button"
+    class="btn btn-crear"
+    data-bs-toggle="modal"
+    data-bs-target="#staticModalNewOrden"
+  >
+    Crear orden
+  </button>
+  <div class="mx-2 btn btn-crear_user">
+    <app-register-user></app-register-user>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="staticModalNewOrden"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticNewOrden"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticNewOrden">
+          {{ ifEdit ? "Editar orden N°: " : "Nueva orden" }}
+        </h1>
+        <strong class="fs-5" *ngIf="dataEdit"> {{ dataEdit.id }}</strong>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="dataEdit = false"
+          (click)="ifEdit = false"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-center my-2 gap-0">
+          <h2
+            class="col-2 d-flex align-items-center"
+            style="justify-content: flex-end"
+          >
+            Usuario
+          </h2>
+          <div class="col-5">
+            <select
+              #selectUserValue
+              class="form-select"
+              aria-label="Default select example"
+              (change)="selectUser(selectUserValue.value)"
+            >
+              <option value="" selected>Selecciona un usuario</option>
+              <option [value]="user.id" *ngFor="let user of userList">
+                {{ user.mail }}
+              </option>
+            </select>
+          </div>
+          <div class="col-3">
+            <button class="btn btn-crear_user h-100" (click)="crearUser()">
+              Crear Cuenta
+            </button>
+          </div>
+        </div>
+        <hr />
+        <form class="container container-main" [formGroup]="formCheckout">
+          <div>
+            <h3 class="d-flex align-items-center">
+              Detalles De Facturación
+              <span class="material-symbols-outlined mx-2"> receipt_long </span>
+            </h3>
+            <div class="items-detail">
+              <div>
+                <label for="Nombre" class="form-label mb-0"
+                  >Nombres<span class="text-danger">*</span></label
+                >
+                <input
+                  formControlName="nombre"
+                  type="text"
+                  class="form-control"
+                  id="Nombre"
+                  placeholder="Nombre"
+                />
+                <div
+                  *ngIf="
+                    formCheckout.get('nombre')!.invalid &&
+                    formCheckout.get('nombre')!.touched
+                  "
+                  class="text-danger"
+                >
+                  Campo requerido
+                </div>
+              </div>
+
+              <div>
+                <label for="apellido" class="form-label mb-0"
+                  >Apellidos<span class="text-danger">*</span></label
+                >
+                <input
+                  formControlName="apellido"
+                  type="text"
+                  class="form-control"
+                  id="apellido"
+                  placeholder="Apellidos"
+                />
+                <div
+                  *ngIf="
+                    formCheckout.get('apellido')!.invalid &&
+                    formCheckout.get('apellido')!.touched
+                  "
+                  class="text-danger"
+                >
+                  Campo requerido
+                </div>
+              </div>
+
+              <div>
+                <label for="correo_checkout" class="form-label mb-0"
+                  >Correo<span class="text-danger">*</span></label
+                >
+                <input
+                  formControlName="email"
+                  type="email"
+                  class="form-control"
+                  id="correo_checkout"
+                  placeholder="name@example.com"
+                />
+                <div
+                  *ngIf="
+                    formCheckout.get('email')!.invalid &&
+                    formCheckout.get('email')!.touched
+                  "
+                  class="text-danger"
+                >
+                  Campo requerido
+                </div>
+              </div>
+
+              <div>
+                <label for="telefono_checkout" class="form-label mb-0"
+                  >Telefono<span class="text-danger">*</span></label
+                >
+                <input
+                  formControlName="telefono"
+                  type="number"
+                  class="form-control"
+                  id="telefono_checkout"
+                  placeholder="1234567890"
+                  (change)="validateNumber('telefono')"
+                />
+                <div
+                  *ngIf="
+                    formCheckout.get('telefono')!.invalid &&
+                    formCheckout.get('telefono')!.touched
+                  "
+                  class="text-danger"
+                >
+                  Campo requerido
+                </div>
+              </div>
+
+              <div>
+                <label class="form-label mb-0">Tipo Documento*</label>
+                <select formControlName="TipDocumento" class="form-select">
+                  <option value="" selected disabled>
+                    Selecciona una opción
+                  </option>
+                  <option
+                    *ngFor="let tipo of typeIdentyti"
+                    value="{{ tipo.id }}"
+                  >
+                    {{ tipo.names_card }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="
+                    formCheckout.get('TipDocumento')!.invalid &&
+                    formCheckout.get('TipDocumento')!.touched
+                  "
+                  class="text-danger"
+                >
+                  Campo requerido
+                </div>
+              </div>
+
+              <div>
+                <label for="document" class="form-label mb-0"
+                  >N° De Documento<span class="text-danger">*</span></label
+                >
+                <input
+                  formControlName="numDocumento"
+                  type="number"
+                  class="form-control"
+                  id="document"
+                  placeholder="1234567890"
+                  (change)="validateNumber('numDocumento')"
+                />
+                <div
+                  *ngIf="
+                    formCheckout.get('numDocumento')!.invalid &&
+                    formCheckout.get('numDocumento')!.touched
+                  "
+                  class="text-danger"
+                >
+                  Campo requerido
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div>
+            <h3 class="d-flex align-items-center">
+              Datos de envío
+              <span class="material-symbols-outlined mx-2">
+                forward_to_inbox
+              </span>
+            </h3>
+            <div class="items-detail">
+              <div>
+                <label class="form-label mb-0"
+                  >Departamento <span class="text-danger">*</span></label
+                >
+                <select
+                  #departamento
+                  formControlName="departamento"
+                  class="form-select mb-1"
+                  (change)="filterCitys(departamento.value)"
+                >
+                  <option value="" disabled>Selecciona El Departamento</option>
+                  <option
+                    *ngFor="let departamento of listDepartament"
+                    value="{{ departamento.id }}"
+                  >
+                    {{ departamento.names_department | titlecase }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="
+                    formCheckout.get('departamento')!.invalid &&
+                    formCheckout.get('departamento')!.touched
+                  "
+                  class="text-danger"
+                >
+                  Campo requerido
+                </div>
+              </div>
+              <div>
+                <label class="form-label mb-0"
+                  >Ciudad <span class="text-danger">*</span></label
+                >
+                <select
+                  formControlName="ciudad"
+                  class="form-select mb-1"
+                  aria-label="Default select example"
+                  (change)="selectCyti()"
+                >
+                  <option value="" disabled>Selecciona El Ciudad</option>
+                  <option *ngFor="let city of filterCity" value="{{ city.id }}">
+                    {{ city.name_city | titlecase }}
+                  </option>
+                </select>
+
+                <div
+                  *ngIf="
+                    formCheckout.get('ciudad')!.invalid &&
+                    formCheckout.get('ciudad')!.touched
+                  "
+                  class="text-danger"
+                >
+                  Campo requerido
+                </div>
+              </div>
+              <div>
+                <label for="address" class="form-label mb-0"
+                  >Dirección De Entrega
+                  <span class="text-danger">*</span></label
+                >
+                <input
+                  formControlName="direccion"
+                  type="text"
+                  class="form-control"
+                  id="address"
+                  placeholder="carrera 12 # 12-12"
+                />
+                <div
+                  *ngIf="
+                    formCheckout.get('direccion')!.invalid &&
+                    formCheckout.get('direccion')!.touched
+                  "
+                  class="text-danger"
+                >
+                  Campo requerido
+                </div>
+              </div>
+              <div style="grid-area: 2 / 1 / 2 / 4">
+                <label for="refencia" class="form-label mb-0"
+                  >Refencia u observaciones</label
+                >
+                <input
+                  formControlName="refencia"
+                  type="text"
+                  class="form-control"
+                  id="refencia"
+                  placeholder="Casa azul, entregar en el piso 2"
+                />
+              </div>
+            </div>
+          </div>
+          <hr />
+          <!-- seleccion de productos -->
+          <div>
+            <h3 class="d-flex align-items-center mb-2">
+              Producto
+              <span class="material-symbols-outlined"> add_shopping_cart </span>
+              <button
+                class="btn pb-0 border m-2 border-info"
+                (click)="addProduct()"
+                *ngIf="!ifEdit"
+              >
+                <span class="material-symbols-outlined"> add </span>
+              </button>
+            </h3>
+            <div
+              *ngFor="let product of selectedProducts; let i = index"
+              class="d-flex align-items-center gap-1"
+            >
+              <div style="width: 60%">
+                <label for="">Selecciona un producto</label>
+                <input
+                  class="form-control input-product"
+                  list="datalistProductosOrder"
+                  placeholder="Buscar un Producto"
+                  #productInput
+                  (change)="selectProduct(productInput, i)"
+                  [disabled]="ifEdit"
+                />
+                <datalist id="datalistProductosOrder">
+                  <option
+                    *ngFor="let listProducto of listProductos"
+                    [value]="listProducto.product_name"
+                  ></option>
+                </datalist>
+              </div>
+              <div>
+                <label for="">Cantidad</label>
+                <input
+                  #productQuantity
+                  (change)="updatePrice(productQuantity, i, productInput.value)"
+                  class="form-control"
+                  type="number"
+                  value="1"
+                  [disabled]="ifEdit"
+                />
+              </div>
+              <div>
+                <label for="">Precio unit</label>
+                <input
+                  disabled
+                  #salePrice
+                  class="form-control"
+                  type="text"
+                  [value]="product.sale_price"
+                  (input)="updateTotal()"
+                />
+              </div>
+              <div>
+                <label for="">Stock</label>
+                <input
+                  #stock
+                  disabled
+                  class="form-control"
+                  type="text"
+                  [value]="product.stock || 0"
+                  (input)="updateTotal()"
+                />
+              </div>
+              <button
+                *ngIf="!ifEdit"
+                class="btn pb-0"
+                (click)="removeProduct(i)"
+              >
+                <span class="material-symbols-outlined"> delete_forever </span>
+              </button>
+            </div>
+
+            <div class="d-flex mt-2">
+              <label for="" class="m-1">Valor de envio</label>
+              <input
+                #envio
+                [disabled]="ifEdit"
+                class="form-control"
+                type="number"
+                style="width: 150px"
+                value="10000"
+                (input)="updateTotal()"
+              />
+            </div>
+            <div style="display: flex; justify-content: flex-end">
+              <h4><b>Total:</b> {{ total | currency }}</h4>
+            </div>
+          </div>
+
+          <div
+            class="w-100 d-flex justify-content-center d-flex align-items-center"
+            style="flex-direction: column"
+          >
+            <div
+              *ngIf="formCheckout.invalid && formCheckout.touched"
+              class="alert alert-danger d-flex justify-content-center m-0 p-1 mt-1 w-100"
+              role="alert"
+              style="max-height: 50px"
+            >
+              El formulario no es válido
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          #cancelBtn
+          type="button"
+          class="btn btn-light"
+          data-bs-dismiss="modal"
+          (click)="dataEdit = false"
+          (click)="ifEdit = false"
+        >
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary text-light"
+          (click)="createOrden()"
+          *ngIf="!ifEdit"
+        >
+          Crear
+        </button>
+        <button
+          type="button"
+          class="btn btn-success text-light"
+          (click)="createOrden()"
+          *ngIf="ifEdit"
+        >
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

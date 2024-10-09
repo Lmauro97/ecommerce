@@ -1,0 +1,44 @@
+<div class="col-md-12">
+  <div class="card mb-4 mb-md-0" style="min-height: 228px">
+    <div style="height: 450px; overflow: auto" class="card-body">
+      <p class="mb-4">Seguimiento De La Compra</p>
+      <div *ngFor="let compra of listPurchaseTracking; let i = index">
+        <p class="mb-1" style="font-size: 14px">
+          Fecha de compra:
+          {{ compra.date_register | date : "dd/MM/yyyy" }} - Referencia de pago:
+          {{ compra.payment_reference || 0 }} - Estado del pago:
+          {{ compra.estado_pago }}
+        </p>
+        <div
+          class="progress rounded mb-1"
+          [ngStyle]="{
+            'background-color': compra.porcentProccese === 0 ? '#ff9800' : ''
+          }"
+          style="height: 26px; display: flex; align-items: center"
+        >
+          <small
+            class="text-white px-5"
+            style="text-align: center"
+            *ngIf="compra.porcentProccese === 0"
+          >
+            <p>Este pedido fue devuelto</p>
+          </small>
+          <div
+            class="progress-bar h-100"
+            role="progressbar"
+            [style.width]="compra.porcentProccese + '%'"
+            [style.background]="compra.porcentProccese === 100 ? 'green' : ''"
+            [style.background]="
+              compra.porcentProccese === 101 ? '#dc3545d9' : ''
+            "
+            aria-valuenow="80"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            <p>{{ compra.estado_entrega }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

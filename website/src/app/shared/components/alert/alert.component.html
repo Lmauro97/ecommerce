@@ -1,0 +1,44 @@
+<!-- Button trigger modal -->
+<button
+  #modalAlertButton
+  type="button"
+  data-bs-toggle="modal"
+  data-bs-target="#modalAlert"
+  class="d-none"
+></button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="modalAlert"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="modalAlertLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div
+        class="modal-header"
+        [ngStyle]="{
+          'background-color':
+            contMsm.tipo === 'Error' ? '#dc3545bf' : '#198754e6'
+        }"
+        style="color: white"
+      >
+        <h1 class="modal-title fs-5" id="modalAlertLabel">Notificación</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="closeModal()"
+        ></button>
+      </div>
+      <div class="modal-body text-center">
+        <p class="font-size: xx-large">{{ contMsm.message }}</p>
+      </div>
+    </div>
+  </div>
+</div>

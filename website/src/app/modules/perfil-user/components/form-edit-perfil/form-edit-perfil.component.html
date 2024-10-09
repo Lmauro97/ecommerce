@@ -1,0 +1,153 @@
+<div style="min-width: 700px !important">
+  <!-- Button trigger modal -->
+
+  <button
+    #myModalButton
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#modalEditarPerfil"
+  >
+    Editar Perfil
+  </button>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="modalEditarPerfil"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">
+            Editar Perfil
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="form" class="row">
+            <!-- este es el body del formulario-->
+            <div class="mb-3 col-sm-12">
+              <div class="card-body text-center">
+                <img
+                [src]="dataUser[0]?.photo"
+                  alt="avatar"
+                  class="rounded-circle img-fluid"
+                  style="width: 150px"
+                  
+                />
+              </div>
+            </div>
+            <div class="mb-3 col-sm-6">
+              <label for="Nombre" class="form-label">Nombres*</label>
+              <input
+                formControlName="names"
+                type="text"
+                class="form-control"
+                id="Nombre"
+                placeholder="Nombres"
+              />
+            </div>
+            <div class="mb-3 col-sm-6">
+              <label for="Apellidos" class="form-label">Apellidos*</label>
+              <input
+              formControlName="last_name"
+                type="text"
+                class="form-control"
+                id="Apellidos"
+                placeholder="Apellido"
+              />
+            </div>
+            <div class="mb-3 col-sm-6">
+              <label for="Correo" class="form-label">Correo*</label>
+              <input
+                formControlName="mail"
+                type="meil"
+                class="form-control"
+                id="Correo"
+                placeholder="Correo"
+              />
+            </div>
+            
+            
+            <div class="mb-3 col-sm-6">
+              <label class="form-label">Tipo Documento*</label>
+              <select class="form-select" aria-label="Default select example" formControlName="tipo_identificacion">
+                <option *ngFor="let tipo of typeDoc" value="{{tipo.id}}">
+                  {{ tipo.names_card }}
+                </option>
+              </select>
+            </div>
+            <div class="mb-3 col-sm-6">
+              <label for="Identificación" class="form-label"
+                >N° Identificación*</label
+              >
+              <input
+              formControlName="identification_card"
+              type="number"
+                class="form-control"
+                id="Identificación"
+                placeholder="Identificación"
+              />
+            </div>
+            <div class="mb-3 col-sm-6">
+              <label class="form-label">Departamento de residencia*</label>
+              <select class="form-select" aria-label="Default select example" formControlName="names_department" (change)="selectDepartament()">
+                <option *ngFor="let dept of listDepart" [value]="dept.id">{{ dept.names_department }}</option>
+              </select>
+            </div>
+            <div class="mb-3 col-sm-6">
+              <label for="Departamento" class="form-label">Ciudad de residencia*</label>
+              <select
+                class="form-select mb-1"
+                aria-label="Default select example"
+                formControlName="name_city"
+              >
+              <option *ngFor="let listCity of listCity" [value]="listCity.id">{{ listCity.name_city }}</option>
+              </select>
+            </div>
+            <div class="mb-3 col-sm-6">
+              <label for="Identificación" class="form-label">Dirección de residencia*</label>
+              <input
+              formControlName="address"
+                type="text"
+                class="form-control"
+                id="direccion"
+                placeholder="Dirección"
+              />
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            #cerrarModalPerfil
+            type="button"
+            class="btn-cerrar"
+            data-bs-dismiss="modal"
+          >
+            Cerrar
+          </button>
+
+          <button
+            type="button"
+            class="btn-guardar"
+            (click)="closeAndNavigate()"
+          >
+            Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

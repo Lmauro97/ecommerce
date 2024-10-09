@@ -1,0 +1,323 @@
+<app-navbar></app-navbar>
+<div class="row principal">
+  <div class="card card-principal p-3" style="width: 95vw">
+    <div class="row card-body align-items-start">
+      <div class="col-sm-1 imagen-lateral">
+        <div
+          *ngFor="let imageUrl of urlDetail.url; let i = index"
+          class="mb-2"
+          style="width: 50px"
+        >
+          <img
+            [src]="imageUrl"
+            class="img-thumbnail p-0"
+            (click)="goToSlide(i)"
+            alt="..."
+            style="width: 50px"
+          />
+        </div>
+        <div
+          *ngIf="urlDetail.url_video !== null"
+          class="img-thumbnail d-flex justify-content-center align-items-center"
+          data-bs-target="#modalVideo"
+          data-bs-toggle="modal"
+          style="
+            cursor: pointer;
+            background-position: center;
+            background-size: cover;
+            width: 50px;
+          "
+          [style.backgroundImage]="'url(' + urlDetail.urlMain + ')'"
+        >
+          <img
+            src="../assets/img/logos pagina/boton-youtube-player.png"
+            alt=""
+            width="20px"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6 imagen-central">
+        <div id="carouselExampleInterval" class="carousel slide">
+          <div class="carousel-inner">
+            <div
+              *ngFor="let imageUrl of urlDetail.url; let i = index"
+              class="carousel-item"
+              [class.active]="i === activeSlideIndex"
+            >
+              <div
+                class="image-container"
+                (mousemove)="onMouseMove($event, imageElement)"
+                (mouseleave)="onMouseLeave($event)"
+              >
+                <img [src]="imageUrl" class="d-block w-100" #imageElement />
+                <div
+                  class="highlight"
+                  [style.left.px]="highlightPosition.x"
+                  [style.top.px]="highlightPosition.y"
+                  *ngIf="highlightVisible"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 container" *ngIf="imagenVisible">
+        <div
+          class="zoom"
+          [style.backgroundImage]="'url(' + rutaImagenZoom + ')'"
+          [style.backgroundPosition]="backgroundPosition"
+          [style.visibility]="imagenVisible ? 'visible' : 'hidden'"
+        ></div>
+      </div>
+      <!-- dsadas -->
+      <div class="col-sm-3 producData" *ngIf="!imagenVisible">
+        <h3 class="my-3">{{ urlDetail?.title }}</h3>
+        <div class="">
+          <h3
+            class="mt-2"
+            [ngStyle]="{
+              'text-decoration':
+                urlDetail?.precioPromocion !== null &&
+                urlDetail?.on_promocion === 1
+                  ? 'line-through'
+                  : '',
+              color:
+                urlDetail?.precioPromocion !== null &&
+                urlDetail?.on_promocion === 1
+                  ? '#6c757d'
+                  : '',
+              'font-size':
+                urlDetail?.precioPromocion !== null &&
+                urlDetail?.on_promocion === 1
+                  ? '16px'
+                  : ''
+            }"
+          >
+            ${{ urlDetail?.price | formatNumber }}
+          </h3>
+
+          <!-- ///precio de descuento -->
+          <div
+            class="d-flex gap-2 align-items-center"
+            *ngIf="
+              urlDetail?.precioPromocion !== null &&
+              urlDetail?.on_promocion === 1
+            "
+          >
+            <span style="font-size: 24px">
+              ${{ urlDetail?.precioPromocion | formatNumber }}
+            </span>
+            <span
+              class="text-success"
+              style="font-family: cursive; font-weight: 600"
+            >
+              {{
+                ((urlDetail?.price - urlDetail?.precioPromocion) /
+                  urlDetail?.price) *
+                  100 | number : "1.2-2"
+              }}% OFF
+            </span>
+          </div>
+        </div>
+        <ul *ngFor="let caracteristica of urlDetail?.carapteristicas">
+          •
+          {{
+            caracteristica
+          }}
+        </ul>
+      </div>
+      <div class="col-sm-2 seccionFour" *ngIf="!imagenVisible">
+        <label>Cantidad</label>
+        <div class="d-flex gap-3 align-items-center mb-0">
+          <input
+            style="width: 150px"
+            type="number"
+            min="1"
+            value="1"
+            class="form-control mb-2"
+            placeholder="Cantidad"
+            #cantidad
+          />
+
+          <p style="font-size: 20px">
+            Stock Disponible:
+            <span style="font-size: 22px">{{ urlDetail.stock }}</span>
+          </p>
+        </div>
+        <hr class="my-1" />
+        <div class="col-sm-12 d-flex justify-content-center gap-4">
+          <img
+            *ngFor="let medioPago of imgmediosPago"
+            class="mediosPago"
+            src="{{ medioPago.url }}"
+            alt="{{ medioPago.alt }}"
+          />
+        </div>
+        <div class="col-sm-12 row justify-content-center">
+          <div class="col-6 p-1">
+            <button
+              class="btn btn-primary p-1"
+              [routerLink]="['/checkout']"
+              (click)="addProductoCar(idProducto)"
+              style="font-size: 19px; padding: 0"
+            >
+              Comprar Ahora
+            </button>
+          </div>
+          <div class="col-6 p-1">
+            <button
+              class="btn btn-secondary p-1 d-flex justify-content-center align-items-center gap-1"
+              (click)="addProductoCar(idProducto)"
+              style="font-size: 19px; padding: 0"
+            >
+              <span
+                class="material-symbols-outlined shopping_cart p-0 m-0"
+                style="color: #f1f1f1"
+              >
+                shopping_cart
+              </span>
+              Adicionar
+            </button>
+          </div>
+          <div
+            class="col-8 justify-self-center p-1"
+            *ngIf="urlDetail.link_mercado_libre"
+          >
+            <button
+              class="btn mt-1"
+              style="border: solid 0.5px #dace30; font-size: 19px; padding: 0"
+            >
+              <a
+                href="{{ urlDetail.link_mercado_libre !== null }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                style="text-decoration: none; font-size: 20px; padding: 0"
+              >
+                Comprar En Mercado Libre</a
+              >
+            </button>
+          </div>
+
+          <div
+            class="alert alert-info d-flex justify-content-center m-0 p-0 mt-1"
+            role="alert"
+            style="max-height: 50px"
+            *ngIf="msmAddProduct !== ''"
+          >
+            {{ msmAddProduct }}
+          </div>
+        </div>
+        <div
+          class="col-sm-12 p-3"
+          style="
+            border: solid 1px grey;
+            margin-top: 8px;
+            padding: 9px;
+            border-radius: 12px;
+          "
+        >
+          <h4 class="p-0 mb-0 text-center mb-1">
+            Beneficios De Comprar Con Nosotros
+          </h4>
+          <ul class="mx-3">
+            <li>
+              <p>
+                Compra segura con nosotros. Utilizamos protocolos de seguridad
+                para proteger tus datos durante todo el proceso de compra, desde
+                la selección de productos hasta el pago.
+              </p>
+            </li>
+            <li>
+              <p>
+                Toda la información proporcionada será utilizada únicamente para
+                procesar tu pedido y mejorar tu experiencia de compra.
+              </p>
+            </li>
+            <li>
+              <p>
+                Tu seguridad es nuestra prioridad. Utilizamos sistemas de pago
+                seguros para proteger tus transacciones.
+              </p>
+            </li>
+            <li>
+              <p>
+                Ofrecemos una política de devolución sin complicaciones. Si no
+                estás satisfecho con tu compra, contáctanos y te ayudaremos a
+                realizar una devolución o proporcionarte un reembolso.
+              </p>
+            </li>
+          </ul>
+          <!-- <p [innerHTML]="politicas"></p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="card card-principal p-3" style="width: 95vw">
+      <div class="row card-body align-items-start">
+        <div class="col-sm-12">
+          <h3>Descripción</h3>
+
+          <p [innerHTML]="this.urlDetail?.descripcion"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+
+<!-- modal video -->
+<div
+  class="modal fade"
+  id="modalVideo"
+  aria-hidden="true"
+  aria-labelledby="exampleModalToggleLabel"
+  tabindex="-1"
+  style="max-width: 98%; margin: auto"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" style="padding-top: 90px">
+    <div class="modal-content" style="max-width: 90%; margin: auto">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
+          {{ urlDetail.title }}
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="closeModal()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- <iframe
+          #videoFrame
+          width="98%"
+          height="315"
+          [src]="getSafeUrl()"
+          frameborder="0"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe> -->
+
+        <video
+          *ngIf="urlDetail && urlDetail.url_video"
+          style="width: 100%; max-height: 400px"
+          [poster]="urlDetail.urlMain"
+          playsinline=""
+          controlslist="nodownload"
+          controls=""
+          muted=""
+        >
+          <source [src]="urlDetail.url_video" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  </div>
+</div>

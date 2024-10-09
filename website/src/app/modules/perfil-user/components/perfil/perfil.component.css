@@ -1,0 +1,12 @@
+.option_movil {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .option_desktop {
+    display: none;
+  }
+  .option_movil {
+    display: block;
+  }
+}

@@ -1,0 +1,37 @@
+* {
+  color: white;
+}
+
+#admin-pages {
+  height: 100dvh;
+  background-color: rgb(11, 23, 57);
+  width: 100vw;
+
+  display: flex;
+}
+
+#admin-pages-sidebar {
+  width: 20%;
+  height: 100dvh;
+  background-color: rgb(8, 16, 40);
+  color: white;
+  padding: 5px;
+  box-shadow: 0 0 5px 0 rgba(250, 249, 249, 0.747);
+}
+
+#container-main {
+  width: 100%;
+  height: 100dvh;
+  background-color: rgb(11, 23, 57);
+  color: white;
+  padding: 10px;
+  box-shadow: 0 0 5px 0 rgba(250, 249, 249, 0.747);
+  overflow: auto;
+}
+
+#container-main h1 {
+  color: white;
+  text-align: right;
+  font-size: 18px;
+  font-family: sans-serif;
+}

@@ -1,0 +1,103 @@
+<!-- Footer -->
+<footer class="text-center text-lg-start" style="background-color: #000000">
+  <div class="container px-0 mx-auto pb-5">
+    <footer class="d-flex align-items-center py-3 my-0 border-top w-100">
+      <p class="col-md-4 mb-0 text-muted copy1">
+        © 2024 CompraTodoOnline.com. Todos los derechos reservados.
+      </p>
+
+      <div
+        class="d-flex mx-5"
+        style="display: flex; flex-direction: column; justify-content: center"
+      >
+        <img
+          class="img-fluid"
+          style="cursor: pointer; margin: auto"
+          routerLink="/home"
+          width="250"
+          height="100"
+          src="./assets/img/logos pagina/imagen(2).png"
+          alt=""
+        />
+
+        <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+          <input
+            class="form-control"
+            list="datalistOptionsProductos"
+            placeholder="Buscar Un Producto Nombre"
+            #product
+            (change)="verifyProduct(product.value)"
+          />
+          <datalist id="datalistOptionsProductos">
+            <option
+              *ngFor="let listProducto of listProductos"
+              value="{{ listProducto.product_name }}"
+            ></option>
+          </datalist>
+
+          <button
+            class="btn btn-primary"
+            style="max-width: 150px; margin: auto"
+            type="button"
+            (click)="searchProduct(product.value)"
+            [disabled]="alertProductNotFound !== ''"
+          >
+            Buscar
+          </button>
+        </div>
+        <div *ngIf="alertProductNotFound !== ''">
+          <p class="px-2" style="color: rgba(255, 42, 0, 0.932) !important">
+            {{ alertProductNotFound }}
+          </p>
+        </div>
+      </div>
+
+      <ul class="nav col-md-4 justify-content-center" id="listFooter">
+        <li class="nav-item">
+          <a
+            class="nav-link px-2 text-muted"
+            id="ofertas"
+            routerLink="/ofertas"
+            style="padding-bottom: 15px; font-size: 16px"
+            >Ofertas</a
+          >
+        </li>
+        <!-- <li class="nav-item">
+          <app-modal-porque-comprar-aqui
+            class="nav-link px-2 text-muted"
+          ></app-modal-porque-comprar-aqui>
+        </li> -->
+        <li class="nav-item" style="z-index: 1000000">
+          <app-modal-terminos-condiciones
+            class="nav-link px-2 text-muted"
+          ></app-modal-terminos-condiciones>
+        </li>
+        <li class="nav-item" *ngIf="activateOptionPqrs">
+          <app-pqrs class="nav-link px-2 text-muted"></app-pqrs>
+        </li>
+      </ul>
+      <p class="col-md-4 mb-0 text-muted copy2">
+        © 2024 CompraTodoOnline.com. Todos los derechos reservados.
+      </p>
+    </footer>
+  </div>
+</footer>
+<!-- Footer -->
+<div
+  style="
+    position: fixed;
+    right: 20px;
+    bottom: 21px;
+    padding: 0;
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+  "
+>
+  <a href="https://wa.me/573102408793" target="_blank">
+    <img
+      src="../assets/img/logos pagina/whatsapp.png"
+      alt="icono whatsapp"
+      width="45"
+  /></a>
+</div>

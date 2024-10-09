@@ -1,0 +1,131 @@
+/* estilos de mobil */
+
+.main-banner {
+  max-width: 99vw;
+  min-width: 100%;
+  /* min-height: 100vh; */
+  height: 70vh;
+  background: url(../../../../assets/img/mobil/image-header.jpg),
+    lightgray 0px 0px / 100% 100% no-repeat;
+  background-position: center center;
+  background-size: cover; /* Esto asegurará que la imagen cubra todo el espacio sin deformarse */
+  justify-content: center;
+  display: grid;
+}
+.container {
+  width: 328px;
+  height: 290px;
+  flex-shrink: 0;
+  margin: auto;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+}
+.title-new_product {
+  color: #dace30;
+  text-align: center;
+  font-family: Manrope;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  opacity: 0.964;
+}
+.title-main {
+  width: 328px;
+  color: #fff;
+  text-align: center;
+  font-family: Manrope;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px; /* 111.111% */
+  letter-spacing: 1.286px;
+  text-transform: uppercase;
+}
+.text-banner {
+  width: 328px;
+  color: #fff;
+  text-align: center;
+  font-family: Manrope;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 25px; /* 166.667% */
+  opacity: 0.75;
+}
+
+/* estilos de mobil */
+
+/* estilos de table */
+@media (min-width: 738px) and (max-width: 1024px) {
+  .main-banner {
+    min-height: 720px;
+    max-height: 720px;
+    margin: auto;
+    margin-top: 0;
+    padding-top: 0;
+    background: url(../../../../assets/img/tablet/image-header.jpg),
+      lightgray 0px 0px / 100% 100% no-repeat;
+    background-position: center center;
+    background-size: 100%;
+    background-repeat: no-repeat; /* Evita que la imagen de fondo se repita */
+    justify-content: center;
+    display: grid;
+    margin-bottom: 40px;
+  }
+}
+/* estilos de table */
+
+/* estilos de desktop */
+@media (min-width: 1025px) {
+  .main-banner {
+    width: 1440px;
+    height: 85vh;
+    flex-shrink: 0;
+    background: url(../../../../assets/img/desktop/image-hero2.jpg),
+      lightgray 0px 0px / 100% 100% no-repeat;
+    background-position: center center;
+    background-size: 100%;
+    background-repeat: no-repeat; /* Evita que la imagen de fondo se repita */
+    justify-content: center;
+    display: grid;
+    grid-template-columns: 45% 1fr;
+    /* background: #191919; */
+  }
+  .container {
+    width: 379px;
+    height: 346px;
+    flex-shrink: 0;
+    margin: auto;
+    display: grid;
+    align-items: center;
+    justify-content: start;
+    justify-items: start;
+  }
+  .title-new_product {
+    text-align: left;
+  }
+  .title-main {
+    padding: 0;
+    margin: 0 !important;
+    text-align: left !important;
+  }
+
+  .text-banner {
+    padding: 0;
+    margin: 0 !important;
+    text-align: left !important;
+    width: 450px;
+  }
+  .btn-main {
+    width: 160px;
+    height: 48px;
+    flex-shrink: 0;
+    margin: 0% !important;
+  }
+}
+/* estilos de desktop */

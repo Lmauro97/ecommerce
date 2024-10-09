@@ -1,0 +1,16 @@
+* {
+  color: white;
+}
+a {
+  color: white;
+  text-decoration: none;
+}
+.active {
+  background-color: rgb(232 234 238 / 11%);
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.text-red {
+  color: red !important;
+}

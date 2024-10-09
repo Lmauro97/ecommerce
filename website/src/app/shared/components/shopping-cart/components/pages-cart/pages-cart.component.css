@@ -1,0 +1,45 @@
+.list-product {
+  display: grid;
+  grid-template-columns: 20% 65% 10%;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+h1,
+h4 {
+  color: black;
+}
+
+.colorText {
+  color: rgb(0, 0, 0);
+}
+
+.btn-cerrar {
+  max-width: 70px;
+  height: 40px;
+}
+.btn-pagar2 {
+  min-width: 70px;
+
+  border: none;
+  height: 40px;
+  background: #4caf50ba;
+  color: #ffffff;
+}
+.cantidades {
+  width: 70%;
+}
+
+@media (max-width: 768px) {
+  .cantidades {
+    width: 90%;
+  }
+}
+/* estilos de movil */
+@media (min-width: 0px) and (max-width: 736px) {
+  .modal.show .modal-dialog {
+    margin-top: 45%;
+  }
+}
