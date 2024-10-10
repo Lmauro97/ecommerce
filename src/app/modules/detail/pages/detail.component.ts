@@ -101,6 +101,10 @@ export class DetailComponent {
     this.activeSlideIndex = index;
   }
   onMouseMove(event: MouseEvent, imageElement: HTMLImageElement) {
+    //se debe habilitar en el html 
+    // class="image-container"
+    //             (mousemove)="onMouseMove($event, imageElement)"
+    //             (mouseleave)="onMouseLeave($event)"
     const rect = imageElement.getBoundingClientRect();
     const highlightWidth = imageElement.width * 0.5; // 50%
     const highlightHeight = imageElement.height * 0.4; // 40%

@@ -46,8 +46,7 @@
             >
               <div
                 class="image-container"
-                (mousemove)="onMouseMove($event, imageElement)"
-                (mouseleave)="onMouseLeave($event)"
+                
               >
                 <img [src]="imageUrl" class="d-block w-100" #imageElement />
                 <div
@@ -62,14 +61,14 @@
         </div>
       </div>
 
-      <div class="col-sm-6 container" *ngIf="imagenVisible">
+      <!-- <div class="col-sm-6 container" *ngIf="imagenVisible">
         <div
           class="zoom"
           [style.backgroundImage]="'url(' + rutaImagenZoom + ')'"
           [style.backgroundPosition]="backgroundPosition"
           [style.visibility]="imagenVisible ? 'visible' : 'hidden'"
         ></div>
-      </div>
+      </div> -->
       <!-- dsadas -->
       <div class="col-sm-3 producData" *ngIf="!imagenVisible">
         <h3 class="my-3">{{ urlDetail?.title }}</h3>

@@ -2,7 +2,8 @@
   transition: transform 0.25s ease;
 }
 .imagen-central img {
-  cursor: url("../../../../assets/img/zoom.png"), auto;
+  /* cursor: url("../../../../assets/img/zoom.png"), auto; */
+  cursor: -moz-zoom-in;
 }
 .image-container {
   position: relative;
@@ -159,3 +160,4 @@ p {
     margin: 5%;
   }
 }
+/* cursor */
